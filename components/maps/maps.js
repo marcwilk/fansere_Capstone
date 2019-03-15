@@ -1,31 +1,21 @@
-import React from 'react'
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native'
-import firebase from 'firebase'
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps'
 
-export default class Maps extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
-  }
-
-
+export default class Maps extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Maps</Text>
-      </View>
-    )
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{flex: 1}}
+        region={{
+          latitude: 42.882004,
+          longitude: 74.582748,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}
+        showsUserLocation={true}
+      />
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
