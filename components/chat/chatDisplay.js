@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput, Button } from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
 import Chatlist from './chatList'
+import Chat from './chat'
 
 export default class Chatdisplay extends React.Component {
   constructor(props) {
@@ -10,14 +11,20 @@ export default class Chatdisplay extends React.Component {
     this.state = {
       userId: "soalBDZkkoMBzJAd5EdQsE5x8113",
       conversations: [],
-      chats: []
+      chats: [],
+      showChat: false,
+      chatName: null,
     }
+    this.showChat = this.showChat.bind(this)
+    this.hideChat = this.hideChat.bind(this)
+    this.onPressChat = this.onPressChat.bind(this)
+    this.setChatName = this.setChatName.bind(this)
   }
 
   checkForUserId(arr) {
     let result = null
     for (let x = 0; x < arr.length; x++) {
-        if (arr[x].userId === "soalBDZkkoMBzJAd5EdQsE5x8113") {
+        if (arr[x].userId === this.state.userId) {
             result = arr
         }
     }
@@ -38,16 +45,41 @@ export default class Chatdisplay extends React.Component {
               otherUser: otherUser[0]
             }
             this.setState({conversations: [...this.state.conversations, conversation]})
-            console.log(this.state.conversations)
+            //console.log(this.state.conversations)
           }
         })
       })
   }
 
+  onPressChat(chatId) {
+    //call to grab relebent chat messages
+    firebase.firestore().collection('chats')
+      .doc(chatId)
+      .onSnapshot(snapshot => {
+        if (snapshot.data()) {
+          let messages = snapshot.data().messages
+            this.setState({chats: messages})
+            //console.log(this.state.chats)
+        }
+      })
+  }
+
+  setChatName(input) {
+    this.setState({chatName: input})
+  }
+
+  showChat() {
+    this.setState({showChat: true})
+  }
+
+  hideChat() {
+    this.setState({showChat: false, chats: []})
+  }
+
   render() {
     return (
       <View>
-        <Chatlist conversations={this.state.conversations}/>
+        {this.state.showChat ? <Chat hideChat={this.hideChat} messages={this.state.chats} userId={this.state.userId} chatName={this.state.chatName}/> : <Chatlist setChatName={this.setChatName} conversations={this.state.conversations} pressChat={this.onPressChat} showChat={this.showChat}/>}
       </View>
     )
   }
