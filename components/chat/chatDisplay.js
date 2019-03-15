@@ -9,22 +9,37 @@ export default class Chatdisplay extends React.Component {
     super(props)
     this.state = {
       userId: "soalBDZkkoMBzJAd5EdQsE5x8113",
-      conversations: []
+      conversations: [],
+      chats: []
     }
   }
 
+  checkForUserId(arr) {
+    let result = null
+    for (let x = 0; x < arr.length; x++) {
+        if (arr[x].userId === "soalBDZkkoMBzJAd5EdQsE5x8113") {
+            result = arr
+        }
+    }
+    return result
+}
+
   componentDidMount() {
+    //call to grab all conversation relationships
     firebase.firestore().collection('conversations')
       .onSnapshot(snapshot => {
         let newDocs = snapshot.docChanges()
         newDocs.forEach(doc => {
-          let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
-          let conversation = {
-            convoId: doc.doc.id,
-            otherUser: otherUser[0]
+          let releventInfo = this.checkForUserId(doc.doc.data().members)
+          if (releventInfo) {
+            let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
+            let conversation = {
+              convoId: doc.doc.id,
+              otherUser: otherUser[0]
+            }
+            this.setState({conversations: [...this.state.conversations, conversation]})
+            console.log(this.state.conversations)
           }
-          this.setState({conversations: [...this.state.conversations, conversation]})
-          console.log(this.state.conversations)
         })
       })
   }

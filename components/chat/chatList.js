@@ -1,14 +1,40 @@
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, View} from 'react-native'
 import { Header, ListItem } from 'react-native-elements'
+import firebase from 'firebase'
+import 'firebase/firestore'
 
 export default class Chatlist extends Component {
   constructor(props) {
     super(props)
   }
 
+
+
+
+
+  onPressChat(chatId) {
+    firebase.firestore().collection('chats')
+      .onSnapshot(snapshot => {
+        let newDocs = snapshot.docChanges()
+        newDocs.forEach(doc => {
+          //how i get to the nested data???
+          console.log(doc.doc.data())
+        })
+      })
+  }
+
+
+
   renderChatList(chatArr) {
-    return chatArr.map((info, i) => <ListItem key={i} title={info.otherUser.username} style={styles.list} />)
+    return chatArr.map((info, i) => <ListItem
+                                      key={i}
+                                      id={info.convoId}
+                                      title={info.otherUser.username}
+                                      style={styles.list}
+                                      onPress={e => this.onPressChat(info.convoId)}
+                                      chevron chevronColor="black"
+                                      />)
   }
 
 
