@@ -9,19 +9,10 @@ export default class Chatlist extends Component {
     super(props)
   }
 
-
-
-
-
-  onPressChat(chatId) {
-    firebase.firestore().collection('chats')
-      .onSnapshot(snapshot => {
-        let newDocs = snapshot.docChanges()
-        newDocs.forEach(doc => {
-          //how i get to the nested data???
-          console.log(doc.doc.data())
-        })
-      })
+  onPressChat(chatId, chatName) {
+    this.props.pressChat(chatId)
+    this.props.showChat()
+    this.props.setChatName(chatName)
   }
 
 
@@ -32,7 +23,9 @@ export default class Chatlist extends Component {
                                       id={info.convoId}
                                       title={info.otherUser.username}
                                       style={styles.list}
-                                      onPress={e => this.onPressChat(info.convoId)}
+                                      containerStyle={{backgroundColor: 'black'}}
+                                      titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                                      onPress={e => this.onPressChat(info.convoId, info.otherUser.username)}
                                       chevron chevronColor="black"
                                       />)
   }
@@ -42,7 +35,7 @@ render() {
   return (
     <View>
       <Header
-          backgroundColor="#228b22"
+          backgroundColor="rgb(126, 217, 75)"
           centerComponent={{ text: 'Chat', style: { color: '#fff', fontSize: 22} }}
         />
         {this.renderChatList(this.props.conversations)}
@@ -55,6 +48,6 @@ render() {
 const styles = StyleSheet.create({
   list: {
     borderWidth: .5,
-    borderColor: "#228b22",
+    borderColor: "rgb(126, 217, 87)",
   }
 })

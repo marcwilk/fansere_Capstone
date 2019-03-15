@@ -65,9 +65,11 @@ export default class SignUp extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: 50,
     width: '100%',
     padding: 20,
+    backgroundColor: '#F5FCFF'
   },
   label: {
     padding: 5,
@@ -83,7 +85,6 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     color: '#333',
     fontSize: 18,
-    //fontWeight: '700',
     width: '100%',
     borderColor: '#ccc',
     borderBottomWidth: 2
