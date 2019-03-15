@@ -23,8 +23,8 @@ export default class Teams extends React.Component {
         <View style={styles.container}>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                  <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
-                  <Text style={styles.name}>My Teams</Text>
+                <Image style={styles.avatar} source={require('../../images/logo.png')}/>
+                <Text style={styles.name}>My Teams</Text>
               </View>
             </View>
             <View style={styles.body}>
@@ -47,11 +47,12 @@ export default class Teams extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    padding: 10,
+    backgroundColor: 'black'
   },
   header: {
     backgroundColor: '#545454',
-    width: 350
+    width: '100%',
   },
   headerContent: {
     padding: 10,
@@ -75,7 +76,8 @@ const styles = StyleSheet.create({
     fontWeight:'600'
   },
   body: {
-    padding:30,
+    width: '100%',
+    padding: 30,
     backgroundColor :'#a6a6a6'
   },
   box: {
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     marginBottom:5,
     backgroundColor: '#fff',
     flexDirection: 'row',
-    shadowColor: 'black',
+    shadowColor: '#a6a6a6',
     shadowOpacity: .2,
     shadowOffset: {
       height:1,
