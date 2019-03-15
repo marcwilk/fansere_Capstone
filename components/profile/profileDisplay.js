@@ -47,21 +47,21 @@ export default class Profiledisplay extends React.Component {
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <Image source={require('../../images/logo.png')} style={{ width: 75, height: 75, borderRadius: 37.5 }} />
+                <Image source={require('../../images/logo.png')} style={{ width: 75, height: 75, borderRadius: 37.5, borderWidth: 2, borderColor: '#fff', }} />
               </View>
               <View style={{ flex: 3 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end' }}>
                   <View style={{ alignItems: 'center' }}>
                     <Text style={{ color: 'white' }}>20</Text>
-                    <Text style={{ fontSize: 10, color: 'white' }}>Roster</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Roster</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
                     <Text style={{ color: 'white' }}>205</Text>
-                    <Text style={{ fontSize: 10, color: 'white' }}>Posts</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Posts</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
                     <Text style={{ color: 'white' }}>167</Text>
-                    <Text style={{ fontSize: 10, color: 'white' }}>Check-Ins</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Check-Ins</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'flex-start', paddingTop: 10 }}>
@@ -102,10 +102,10 @@ export default class Profiledisplay extends React.Component {
             <View>
               <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: 'black', backgroundColor: '#7ed957'}}>
                 <Button transparent onPress={ () => this.segmentClicked(0) } active={ this.state.activeIndex == 0 }>
-                  <Text style={[ this.state.activeIndex == 0 ? { color: 'white' } : { color: 'black' }]}>Teams</Text>
+                  <Text style={[ this.state.activeIndex == 0 ? { color: 'white', fontSize: 16 } : { color: 'black', fontSize: 16 }]}>Teams</Text>
                 </Button>
                 <Button transparent onPress={ () => this.segmentClicked(1) } active={ this.state.activeIndex == 1 }>
-                  <Text style={[ this.state.activeIndex == 1 ? { color: 'white' } : { color: 'black' }]}>Roster</Text>
+                  <Text style={[ this.state.activeIndex == 1 ? { color: 'white', fontSize: 16 } : { color: 'black', fontSize: 16 }]}>Roster</Text>
                 </Button>
               </View>
             </View>

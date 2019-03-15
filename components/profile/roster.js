@@ -43,7 +43,7 @@ export default class Roster extends React.Component {
         <View style={styles.container}>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                  <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
+                  <Image style={styles.avatar} source={require('../../images/logo.png')}/>
                   <Text style={styles.name}>Add Friends</Text>
               </View>
             </View>
@@ -64,7 +64,7 @@ export default class Roster extends React.Component {
             </View>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                  <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
+                  <Image style={styles.avatar} source={require('../../images/logo.png')}/>
                   <Text style={styles.name}>My Friends</Text>
               </View>
             </View>
@@ -90,11 +90,12 @@ export default class Roster extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    padding: 10,
+    backgroundColor: 'black'
   },
   header: {
     backgroundColor: '#545454',
-    width: 350
+    width: '100%'
   },
   headerContent: {
     padding: 10,
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     fontWeight:'600'
   },
   body: {
+    width: '100%',
     padding:30,
     backgroundColor :'#a6a6a6'
   },
