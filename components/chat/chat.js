@@ -16,9 +16,12 @@ export default class Chat extends React.Component {
           leftComponent={<Icon name="arrow-left" size={17} color="white" onPress={this.props.hideChat}/>}
           centerComponent={{ text: `${this.props.chatName}`, style: { color: '#fff', fontSize: 22 } }}
         />
-        <Input />
-        <Messages messages={this.props.messages} userId={this.props.userId}/>
-
+        <Input addMessage={this.props.addMessage}/>
+        <ScrollView>
+          <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={180}>
+            <Messages messages={this.props.messages} userId={this.props.userId}/>
+          </KeyboardAvoidingView>
+        </ScrollView>
       </View>
     )
   }

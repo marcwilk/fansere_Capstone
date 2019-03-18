@@ -15,7 +15,7 @@ export default class Message extends React.Component {
   render() {
     return (
       <View>
-        <Text style={this.styleSelector(this.props.info.senderId)}>{this.props.info.message}</Text>
+        <Text style={this.styleSelector(this.props.info.userId)}>{this.props.info.message}</Text>
       </View>
     )
   }

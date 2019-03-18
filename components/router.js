@@ -13,6 +13,25 @@ const TabNavigator = createBottomTabNavigator({
   Profile: { screen: props => <Profiledisplay />},
   Map: { screen: props => <Maps />},
   Feed: { screen: props => <Feed />}
-})
+},
+{
+tabBarOptions: {
+    activeTintColor: '#7ed957',
+    inactiveTintColor: '#ffffff',
+    labelStyle: {
+    fontSize: 14,
+    },
+    style: {
+    backgroundColor: '#545454',
+    color: '#7ed957',
+    paddingTop: 5
+   },
+ },
+}
+
+
+
+
+)
 
 export default createAppContainer(TabNavigator);
