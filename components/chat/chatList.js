@@ -13,6 +13,7 @@ export default class Chatlist extends Component {
     this.props.pressChat(chatId)
     this.props.showChat()
     this.props.setChatName(chatName)
+    this.props.setChatId(chatId)
   }
 
 
