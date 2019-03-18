@@ -10,122 +10,38 @@ import {
   Dimensions,
   TouchableHighlight,
   Alert
-} from "react-native";
+} from "react-native"
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps'
+import firebase from 'firebase'
+import 'firebase/firestore'
 
-const Images = [
-  {
-    uri: "http://content.sportslogos.net/logos/99/3066/full/870.gif"
-  }, {
-    uri: "http://content.sportslogos.net/logos/54/3637/thumbs/363775442019.gif"
-  }, {
-    uri: "http://content.sportslogos.net/logos/6/214/thumbs/burm5gh2wvjti3xhei5h16k8e.gif"
-  }, {
-    uri: "http://content.sportslogos.net/logos/1/13/thumbs/1380782017.gif"
-  },{
-    uri: "http://content.sportslogos.net/logos/30/643/thumbs/2451.gif"
-  },{
-    uri: "http://content.sportslogos.net/logos/30/647/thumbs/7489.gif"
-  },{
-    uri: "http://content.sportslogos.net/logos/32/748/thumbs/2848.gif"
-  },{
-    uri: "http://content.sportslogos.net/logos/7/172/thumbs/17227042013.gif"
-  },
-]
-
-const {width, height} = Dimensions.get("window");
-
+const {width, height} = Dimensions.get("window")
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 export default class Maps extends Component<Props> {
 
   state = {
-    markers: [
-      {
-        coordinate: {
-          latitude: 40.0182,
-          longitude: -105.2775
-        },
-        title: "The Lazy Dog",
-        description: "The Lazy Dog is a sports bar with over 20 HD TV's and every sports package including UFC fights",
-        image: Images[0]
-      }, {
-        coordinate: {
-          latitude: 40.0144,
-          longitude: -105.2568
-        },
-        title: "Ralphie's Bar and Grill",
-        description: "Ralphie's specalizes in CU Athletics and Hot Wings",
-        image: Images[1]
-      }, {
-        coordinate: {
-          latitude: 40.0171,
-          longitude: -105.2833
-        },
-        title: "The West End Tavern",
-        description: "We love the Broncos!",
-        image: Images[2]
-      }, {
-        coordinate: {
-          latitude: 40.0174,
-          longitude: -105.2809
-        },
-        title: "The Pearl Street Pub",
-        description: "Drunk College Kids!",
-        image: Images[3]
-      },{
-        coordinate: {
-          latitude: 40.0317,
-          longitude: -105.2594
-        },
-        title: "The Outback Saloon",
-        description: "Alcoholics love us!",
-        image: Images[4]
-      },{
-        coordinate: {
-          latitude: 39.9991,
-          longitude: -105.2552
-        },
-        title: "The Dark Horse",
-        description: "Peach Schnapps!",
-        image: Images[5]
-      },{
-        coordinate: {
-          latitude:  39.9843,
-          longitude: -105.2494
-        },
-        title: "Southern Sun",
-        description: "We don't even have TV's ",
-        image: Images[6]
-      },{
-        coordinate: {
-          latitude:  40.0071,
-          longitude: -105.2582
-        },
-        title: "SiP",
-        description: "March Madness HQ!",
-        image: Images[7]
-      },
-    ],
     region: {
       latitude: 40.0166,
       longitude: -105.2817,
       latitudeDelta: 0.04864195044303443,
       longitudeDelta: 0.040142817690068
-    }
-  };
+    },
+    markers: [],
+
+  }
 
   componentWillMount() {
     this.index = 0;
-    this.animation = new Animated.Value(0);
+    this.animation = new Animated.Value(0)
   }
 
   componentDidMount() {
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / CARD_WIDTH + 0.3) // animate 30% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -133,11 +49,11 @@ export default class Maps extends Component<Props> {
         index = 0;
       }
 
-      clearTimeout(this.regionTimeout);
+      clearTimeout(this.regionTimeout)
       this.regionTimeout = setTimeout(() => {
         if (this.index !== index) {
-          this.index = index;
-          const { coordinate } = this.state.markers[index];
+          this.index = index
+          const { coordinate } = this.state.markers[index]
           this.map.animateToRegion(
             {
               ...coordinate,
@@ -147,17 +63,39 @@ export default class Maps extends Component<Props> {
             350
           );
         }
-      }, 10);
-    });
+      }, 10)
+    })
+    // get route for firebase
+   firebase.firestore().collection('BoulderBars')
+    .where('city', '==', 'boulder')
+    .get().then(snapshot=> {
+      snapshot.docs.forEach(doc=> {
+        let barObj = {
+
+        }
+        barObj.coordinate = {
+          latitude: doc.data().coordinate.latitude,
+          longitude: doc.data().coordinate.longitude
+        },
+        barObj.title = doc.data().name,
+        barObj.description = doc.data().description,
+        barObj.image = {uri : doc.data().image},
+        barObj.website = doc.data().website
+        console.log(barObj)
+        this.setState({markers:[...this.state.markers, barObj]})
+
+      })
+    })
   }
 
+
   _onPressButton() {
-    Alert.alert('ZINI FUCKIN FUX')
+    console.log('ZFux')
   }
 
 
   render() {
-
+ console.log('markers :', this.state.markers)
     const interpolations = this.state.markers.map((marker, index) => {
       const inputRange = [
         (index - 1) * CARD_WIDTH,
@@ -178,7 +116,7 @@ export default class Maps extends Component<Props> {
         ],
         extrapolate: "clamp"
       });
-      return {scale, opacity};
+      return {scale, opacity}
     });
 
     return (<View style={styles.container}>
@@ -200,7 +138,7 @@ export default class Maps extends Component<Props> {
                 <Animated.View style={[styles.ring, scaleStyle]}/>
                 <View style={styles.marker}/>
               </Animated.View>
-            </MapView.Marker>);
+            </MapView.Marker>)
           })
         }
         {
@@ -210,7 +148,7 @@ export default class Maps extends Component<Props> {
                 <Animated.View style={[styles.ring]}/>
                 <View style={styles.marker}/>
               </Animated.View>
-            </MapView.Marker>);
+            </MapView.Marker>)
           })
         }
       </MapView>
