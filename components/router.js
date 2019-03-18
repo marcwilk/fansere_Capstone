@@ -8,7 +8,6 @@ import Feed from './feed/mainFeed'
 import Maps from './maps/maps'
 
 const TabNavigator = createBottomTabNavigator({
-  Logout: { screen: props => <LogOut />},
   Chat: { screen: props => <Chatdisplay />},
   Profile: { screen: props => <Profiledisplay />},
   Map: { screen: props => <Maps />},
