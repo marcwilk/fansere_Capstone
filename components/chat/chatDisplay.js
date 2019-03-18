@@ -75,7 +75,7 @@ export default class Chatdisplay extends React.Component {
             result.push(doc.data())
           })
           this.setState({chats: result})
-          console.log(this.state.chats)
+          //console.log(this.state.chats)
         })
   }
 
