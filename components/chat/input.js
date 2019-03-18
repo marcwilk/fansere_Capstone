@@ -15,7 +15,9 @@ export default class Input extends React.Component {
         style={styles.container}
         placeholder={' Type a message...'}
         clearTextOnFocus={true}
-        keyboardType={'default'}>
+        keyboardType={'default'}
+        onSubmitEditing={e => this.props.addMessage(e.nativeEvent.text)}
+        >
         </TextInput>
       </View>
     )

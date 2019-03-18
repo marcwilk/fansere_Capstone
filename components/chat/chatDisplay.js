@@ -13,12 +13,15 @@ export default class Chatdisplay extends React.Component {
       conversations: [],
       chats: [],
       showChat: false,
+      chatId: null,
       chatName: null,
     }
     this.showChat = this.showChat.bind(this)
     this.hideChat = this.hideChat.bind(this)
     this.onPressChat = this.onPressChat.bind(this)
     this.setChatName = this.setChatName.bind(this)
+    this.setChatId = this.setChatId.bind(this)
+    this.addMessage = this.addMessage.bind(this)
   }
 
   checkForUserId(arr) {
@@ -53,19 +56,45 @@ export default class Chatdisplay extends React.Component {
 
   onPressChat(chatId) {
     //call to grab relebent chat messages
-    firebase.firestore().collection('chats')
-      .doc(chatId)
-      .onSnapshot(snapshot => {
-        if (snapshot.data()) {
-          let messages = snapshot.data().messages
-            this.setState({chats: messages})
-            //console.log(this.state.chats)
-        }
+    // firebase.firestore().collection('chats')
+    //   .doc(chatId)
+    //   .onSnapshot(snapshot => {
+    //     if (snapshot.data()) {
+    //       let messages = snapshot.data().messages
+    //         this.setState({chats: messages})
+    //         console.log(this.state.chats)
+    //     }
+    //   })
+      firebase.firestore().collection('chat')
+        .doc(chatId)
+        .collection('messages')
+        .orderBy('timestamp')
+        .onSnapshot(snapshot => {
+          let result = []
+          snapshot.forEach(doc => {
+            result.push(doc.data())
+          })
+          this.setState({chats: result})
+          console.log(this.state.chats)
+        })
+  }
+
+  addMessage(message) {
+    firebase.firestore().collection('chat')
+      .doc(this.state.chatId)
+      .collection('messages').add({
+        userId: this.state.userId,
+        message: message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
   }
 
   setChatName(input) {
     this.setState({chatName: input})
+  }
+
+  setChatId(input) {
+    this.setState({chatId: input})
   }
 
   showChat() {
@@ -79,7 +108,7 @@ export default class Chatdisplay extends React.Component {
   render() {
     return (
       <View>
-        {this.state.showChat ? <Chat hideChat={this.hideChat} messages={this.state.chats} userId={this.state.userId} chatName={this.state.chatName}/> : <Chatlist setChatName={this.setChatName} conversations={this.state.conversations} pressChat={this.onPressChat} showChat={this.showChat}/>}
+        {this.state.showChat ? <Chat addMessage={this.addMessage} hideChat={this.hideChat} messages={this.state.chats} userId={this.state.userId} chatName={this.state.chatName}/> : <Chatlist setChatId={this.setChatId} setChatName={this.setChatName} conversations={this.state.conversations} pressChat={this.onPressChat} showChat={this.showChat}/>}
       </View>
     )
   }
