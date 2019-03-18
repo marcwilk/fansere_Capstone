@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     borderColor: "rgb(126, 217, 87)",
     borderWidth: 3,
     borderRadius: 4,
-    marginLeft: 8,
-    marginRight: 8,
+    marginLeft: 1,
+    marginRight: 1,
     backgroundColor: 'white',
     color: 'black',
     overflow: 'hidden',
-    marginBottom: 20,
+    marginBottom: 2,
     marginTop: 10
   }
 })

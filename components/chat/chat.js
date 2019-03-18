@@ -8,6 +8,8 @@ import Messages from './messages'
 
 export default class Chat extends React.Component {
 
+
+
   render() {
     return (
       <View>
@@ -16,10 +18,21 @@ export default class Chat extends React.Component {
           leftComponent={<Icon name="arrow-left" size={17} color="white" onPress={this.props.hideChat}/>}
           centerComponent={{ text: `${this.props.chatName}`, style: { color: '#fff', fontSize: 22 } }}
         />
-        <Input addMessage={this.props.addMessage}/>
         <ScrollView>
-          <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={180}>
-            <Messages messages={this.props.messages} userId={this.props.userId}/>
+          <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={90}
+            >
+            <View style={{height: 570}}>
+              <ScrollView
+                ref={ref => this.scrollView = ref}
+                onContentSizeChange={()=>{
+                  this.scrollView.scrollToEnd({animated: false});
+                }}>
+                  <Messages messages={this.props.messages} userId={this.props.userId}/>
+              </ScrollView>
+            </View>
+            <Input addMessage={this.props.addMessage}/>
           </KeyboardAvoidingView>
         </ScrollView>
       </View>

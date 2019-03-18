@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, ScrollView } from 'react-native';
+import {StyleSheet, View } from 'react-native';
 import Message from './message'
 
 
@@ -14,13 +14,14 @@ export default class Messanges extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.navHeight}>
+      <View style={styles.navHeight}>
         {this.props.messages.map((messageData, i) => <Message info={messageData} key={i} userId={this.props.userId} />)}
-      </ScrollView>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  navHeight: { marginBottom: 120}
+  navHeight: { marginBottom: 10},
+  
 })
