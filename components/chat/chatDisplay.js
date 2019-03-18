@@ -9,7 +9,7 @@ export default class Chatdisplay extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: "soalBDZkkoMBzJAd5EdQsE5x8113",
+      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       conversations: [],
       chats: [],
       showChat: false,
@@ -35,6 +35,7 @@ export default class Chatdisplay extends React.Component {
 }
 
   componentDidMount() {
+    console.log(this.props.screenProps)
     //call to grab all conversation relationships
     firebase.firestore().collection('conversations')
       .onSnapshot(snapshot => {
@@ -55,16 +56,6 @@ export default class Chatdisplay extends React.Component {
   }
 
   onPressChat(chatId) {
-    //call to grab relebent chat messages
-    // firebase.firestore().collection('chats')
-    //   .doc(chatId)
-    //   .onSnapshot(snapshot => {
-    //     if (snapshot.data()) {
-    //       let messages = snapshot.data().messages
-    //         this.setState({chats: messages})
-    //         console.log(this.state.chats)
-    //     }
-    //   })
       firebase.firestore().collection('chat')
         .doc(chatId)
         .collection('messages')
