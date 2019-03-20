@@ -49,7 +49,6 @@ export default class Chatdisplay extends React.Component {
               otherUser: otherUser[0]
             }
             this.setState({conversations: [...this.state.conversations, conversation]})
-            //console.log(this.state.conversations)
           }
         })
       })

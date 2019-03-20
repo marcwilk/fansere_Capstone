@@ -15,13 +15,24 @@ export default class Feed extends React.Component {
       userName:'Sean Tansey',
       nearbyUsers: [],
       isModalVisible: false,
-      modalUser: {}
+      modalUser: {},
+      conversations: []
     }
     this.modalUser = this.modalUser.bind(this)
   }
 
   _toggleModal = () =>
      this.setState({ isModalVisible: !this.state.isModalVisible })
+
+     checkForUserId(arr) {
+       let result = null
+       for (let x = 0; x < arr.length; x++) {
+           if (arr[x].userId === this.state.userId) {
+               result = arr
+           }
+       }
+       return result
+   }
 
 
   componentDidMount() {
@@ -33,14 +44,30 @@ export default class Feed extends React.Component {
             userId: doc.id,
             data: doc.data()
           }
-          this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+          if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
+            this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+          }
         }
         )
       })
+      firebase.firestore().collection('conversations')
+        .onSnapshot(snapshot => {
+          let newDocs = snapshot.docChanges()
+          newDocs.forEach(doc => {
+            let releventInfo = this.checkForUserId(doc.doc.data().members)
+            if (releventInfo) {
+              let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
+              this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
+            }
+          })
+        })
+  }
+
+  removeUserFromState(arr, userId) {
+    return arr.filter(item => item.userId !== userId)
   }
 
   modalUser(userId, username, location, tagline) {
-    //console.log(userId, username, location, tagline)
     let user = {
       userId: userId,
       username: username,
@@ -53,21 +80,22 @@ export default class Feed extends React.Component {
   }
 
 
-//DATA STRUCTURE PROBLMES!!!!!!
+
   addToRoster(id, username) {
-    //console.log(id, username)
     firebase.firestore().collection('conversations').add({
-        members: {
-          0: {
-            userId: this.state.userId,
-            username: this.state.username
-          },
-          1: {
-            userId: id,
-            username: username
-          }
-        }
+      members: [
+        {
+         userId: this.state.userId,
+         username: this.state.userName,
+       },
+       {
+         userId: id,
+         username: username,
+       }
+      ]
       })
+      let newUserArr = this.removeUserFromState(this.state.nearbyUsers, id)
+      this.setState({nearbyUsers: newUserArr})
   }
 
   render() {
