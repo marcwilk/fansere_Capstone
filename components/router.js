@@ -11,7 +11,7 @@ const TabNavigator = createBottomTabNavigator({
   Chat: { screen: props => <Chatdisplay />},
   Profile: { screen: props => <Profiledisplay />},
   Map: { screen: props => <Maps />},
-  Feed: { screen: props => <Feed />}
+  Users: { screen: props => <Feed />}
 },
 {
 tabBarOptions: {
