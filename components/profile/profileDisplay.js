@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TextInput, Image, ScrollView, TouchableOpacity } from 'react-native'
-import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
+import { View, StyleSheet, Text, ScrollView, TextInput, Image } from 'react-native'
+import { Button } from 'native-base'
 import { Header, Card } from 'react-native-elements'
 import Modal from 'react-native-modal'
 import Teams from './teams'
@@ -17,8 +17,13 @@ export default class Profiledisplay extends React.Component {
       userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
       username: null,
       location: null,
-      tagline: null
+      tagline: null,
+      NHLTeams: [],
+      NFLTeams: [],
+      NBATeams: [],
+      MLBTeams: [],
     }
+
   }
 
   componentDidMount() {
@@ -30,6 +35,50 @@ export default class Profiledisplay extends React.Component {
          this.setState({location: data.location, tagline: data.tagline, username: data.username})
          //console.log(this.state.location)
        })
+
+       //get NHL teams
+       firebase.firestore().collection('NHL Teams')
+        .get().then(snapshot=> {
+          snapshot.docs.forEach(doc=> {
+            let nhlObj ={}
+            nhlObj.team = doc.data().team,
+            nhlObj.logo = doc.data().logo
+            this.setState({NHLTeams:[...this.state.NHLTeams, nhlObj]})
+          })
+        })
+
+        //get NFL teams
+        firebase.firestore().collection('NFL Teams')
+         .get().then(snapshot=> {
+           snapshot.docs.forEach(doc=> {
+             let nflObj ={}
+             nflObj.team = doc.data().team,
+             nflObj.logo = doc.data().logo
+             this.setState({NFLTeams:[...this.state.NFLTeams, nflObj]})
+           })
+         })
+
+         //get NBA teams
+         firebase.firestore().collection('NBA Teams')
+          .get().then(snapshot=> {
+            snapshot.docs.forEach(doc=> {
+              let nbaObj ={}
+              nbaObj.team = doc.data().team,
+              nbaObj.logo = doc.data().logo
+              this.setState({NBATeams:[...this.state.NBATeams, nbaObj]})
+            })
+          })
+
+        //get MLB teams
+        firebase.firestore().collection('MLB Teams')
+         .get().then(snapshot=> {
+           snapshot.docs.forEach(doc=> {
+             let mlbObj ={}
+             mlbObj.team = doc.data().team,
+             mlbObj.logo = doc.data().logo
+             this.setState({MLBTeams:[...this.state.MLBTeams, mlbObj]})
+           })
+         })
    }
 
   updateUsername = (text) => {
@@ -77,18 +126,17 @@ export default class Profiledisplay extends React.Component {
     }
   }
 
-  _toggleModal = () =>
+  toggleModal = () =>
      this.setState({ isModalVisible: !this.state.isModalVisible })
 
   render() {
     return (
-      <Container style={{ flex: 1, backgroundColor: 'black' }}>
+      <View style={{ flex: 1, backgroundColor: 'black' }}>
         <Header backgroundColor='#7ed957' placement='center' centerComponent={{ text: 'Profile', style: { color: 'white', fontSize: 20, fontWeight: 'bold' }}}/>
-        <Content>
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <Image source={require('../../images/logo.png')} style={{ width: 75, height: 75, borderRadius: 37.5, borderWidth: 2, borderColor: '#fff', }} />
+                <Image source={require('../../images/logo.png')} style={styles.profileImage} />
               </View>
               <View style={{ flex: 3 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end' }}>
@@ -107,13 +155,14 @@ export default class Profiledisplay extends React.Component {
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'flex-start', paddingTop: 10 }}>
                   <View style={{ flexDirection: 'row' }}>
-                    <Button light style={{ flex: 3, marginLeft: 10, justifyContent: 'center', height: 30 }} onPress = { this._toggleModal }>
+                    <Button light style={styles.editProfileButton} onPress = { this.toggleModal }>
                       <Text style={{ color: 'black' }}>Edit Profile</Text>
                     </Button>
                     <Modal isVisible={this.state.isModalVisible}>
+
                     <View>
                       <Card containerStyle={{width: 350, padding: 10, backgroundColor: 'black'}}>
-                        <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}> Edit Profile </Text>
+                        <Text style={styles.editProfile}> Edit Profile </Text>
                         <Text style={{color: 'white', fontSize: 16}}>
                           Username:
                         </Text>
@@ -151,19 +200,19 @@ export default class Profiledisplay extends React.Component {
                           onChangeText={this.updateTagline}
                         />
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                        <Button light style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30 }}
+                        <Button light style={styles.button}
                           onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline) }>
                           <Text style = {styles.submitButtonText}>Submit Changes</Text>
                         </Button>
-                        <Button danger style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30 }}
-                          onPress= {this._toggleModal}>
+                        <Button danger style={styles.button}
+                          onPress= {this.toggleModal}>
                           <Text style= {styles.modalText }>Close</Text>
                         </Button>
                         </View>
                       </Card>
                       </View>
                     </Modal>
-                    <Button danger style={{ flex: 1, height: 30, marginRight: 10, marginLeft: 5, justifyContent: 'center'}} onPress={() => this.logOut()}>
+                    <Button danger style={styles.logout} onPress={() => this.logOut()}>
                       <Text style={{ color: 'black' }}>Logout</Text>
                     </Button>
                   </View>
@@ -178,7 +227,7 @@ export default class Profiledisplay extends React.Component {
               </View>
             </View>
             <View>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: 'black', backgroundColor: '#7ed957'}}>
+              <View style={styles.teamsRoster}>
                 <Button transparent onPress={ () => this.segmentClicked(0) } active={ this.state.activeIndex == 0 }>
                   <Text style={[ this.state.activeIndex == 0 ? { color: 'white', fontSize: 16 } : { color: 'black', fontSize: 16 }]}>Teams</Text>
                 </Button>
@@ -187,12 +236,11 @@ export default class Profiledisplay extends React.Component {
                 </Button>
               </View>
             </View>
-            <View style={{ flexDirection: 'row', borderTopWidth: 1, backgroundColor: 'white', color: 'black'}}>
+            <ScrollView style={styles.scrollView}>
               {this.renderSection()}
-            </View>
+            </ScrollView>
           </View>
-        </Content>
-      </Container>
+      </View>
     )
   }
 }
@@ -207,6 +255,28 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'black'
   },
+  scrollView: {
+    marginBottom: 280,
+  },
+  profileImage: {
+    width: 75,
+    height: 75,
+    borderRadius: 37.5,
+    borderWidth: 2,
+    borderColor: '#fff'
+  },
+  editProfileText: {
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  editProfileButton: {
+    flex: 3,
+    marginLeft: 10,
+    justifyContent: 'center',
+    height: 30
+  },
   modalViewContainer: {
     width: '100%',
     height: '50%',
@@ -217,6 +287,12 @@ const styles = StyleSheet.create({
   modalText: {
     justifyContent: 'center',
     color: 'black'
+  },
+  button: {
+    flex: 3,
+    margin: 10,
+    justifyContent: 'center',
+    height: 30
   },
   textInput: {
     height: 40,
@@ -229,5 +305,19 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: 'black'
+  },
+  teamsRoster: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    borderTopWidth: 1,
+    borderTopColor: 'black',
+    backgroundColor: '#7ed957'
+  },
+  logout: {
+    flex: 1,
+    height: 30,
+    marginRight: 10,
+    marginLeft: 5,
+    justifyContent: 'center'
   }
 })

@@ -1,5 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ListView, Image } from 'react-native'
+import firebase from 'firebase'
+import 'firebase/firestore'
 
 export default class Teams extends React.Component {
   constructor(props) {
@@ -14,8 +16,13 @@ export default class Teams extends React.Component {
          {image: 'http://content.sportslogos.net/logos/6/229/full/4681_denver_nuggets-alternate-2019.png', teamname:'Nuggets'},
          {image: 'http://content.sportslogos.net/logos/6/229/full/tht30q65rj1sca9rhsq5zfoih.gif', teamname:'You Know It'},
       ]
+
     }
   }
+
+
+
+
 
     render() {
     return (
