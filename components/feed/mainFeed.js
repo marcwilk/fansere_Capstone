@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, TextInput} from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
-import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
+import { Container, Content, Icon, Left, Body, Right, Button, Image } from 'native-base'
 import OtherUsers from './otherUsers'
 import Modal from 'react-native-modal'
 import { Header, Card } from 'react-native-elements'
@@ -96,6 +96,7 @@ export default class Feed extends React.Component {
       })
       let newUserArr = this.removeUserFromState(this.state.nearbyUsers, id)
       this.setState({nearbyUsers: newUserArr})
+      this._toggleModal()
   }
 
   render() {
@@ -111,14 +112,12 @@ export default class Feed extends React.Component {
         <View>
           <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
             <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.modalUser.username}</Text>
+            
             <Text style={{color: 'white', fontSize: 16}}>
-              Username:
+              Tagline: {this.state.modalUser.tagline}
             </Text>
             <Text style={{color: 'white', fontSize: 16}}>
-              Tagline:
-            </Text>
-            <Text style={{color: 'white', fontSize: 16}}>
-              Location:
+              Location: {this.state.modalUser.location}
             </Text>
             <Text style={{color: 'white', fontSize: 16}}>
               Teams:
