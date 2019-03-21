@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "data" : [
+    {
+      "idiom" : "universal",
+      "filename" : "support_multi_pass_fwd.hpp"
+    }
+  ]
+}

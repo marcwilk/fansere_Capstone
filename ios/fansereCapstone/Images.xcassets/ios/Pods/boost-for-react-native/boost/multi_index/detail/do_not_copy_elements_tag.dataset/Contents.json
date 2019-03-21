@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "data" : [
+    {
+      "idiom" : "universal",
+      "filename" : "do_not_copy_elements_tag.hpp"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "data" : [
+    {
+      "idiom" : "universal",
+      "filename" : "iunordered_set_index.hpp"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "data" : [
+    {
+      "idiom" : "universal",
+      "filename" : "foldr_start_with_parser.hpp"
+    }
+  ]
+}
