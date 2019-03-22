@@ -34,7 +34,6 @@
 		16BB29A834A144A5882D39B9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DA9BA07139A43F59B85D512 /* SimpleLineIcons.ttf */; };
 		1BBA4BF177434AC185765B2B /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7F7AEF3BA994440A1B245E3 /* FontAwesome5_Solid.ttf */; };
 		1C3E990DCC524D3CA6032123 /* review@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F8822A5A6E417A9F8C77BA /* review@1x.png */; };
-		1FA5A46F75FCD91CEDCE9294 /* libPods-fansereCapstone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 913B98387EEBFA3B9FD3FCD4 /* libPods-fansereCapstone.a */; };
 		21746F64476A48F8BC4D8C16 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C078222C87A495288260D88 /* Ionicons.ttf */; };
 		2399EB991AE84D98BC524201 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377F262FF9A34694B52DA63E /* Entypo.ttf */; };
 		243FA754272A4EEF8A3D9CD5 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2196D431EEB94ADA95145FC0 /* list@2x.png */; };
@@ -511,7 +510,6 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6048703B1D2A4C8CA5DB2538 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ./ios/Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		62057C16B10B4025A4BBE1E8 /* review@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "review@2x.png"; path = "../assets/icons/review@2x.png"; sourceTree = "<group>"; };
-		64985E3C3375D7E61BED1718 /* Pods-fansereCapstone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansereCapstone.release.xcconfig"; path = "Target Support Files/Pods-fansereCapstone/Pods-fansereCapstone.release.xcconfig"; sourceTree = "<group>"; };
 		65FE054700324E9C94D6499E /* home@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "home@3x.png"; path = "../assets/icons/home@3x.png"; sourceTree = "<group>"; };
 		6682B309ABDE4E29A678F384 /* categories@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "categories@2x.png"; path = "../assets/icons/categories@2x.png"; sourceTree = "<group>"; };
 		6E68F2A85DA24DB2A5C2479B /* map@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "map@3x.png"; path = "../assets/icons/map@3x.png"; sourceTree = "<group>"; };
@@ -525,7 +523,6 @@
 		8AA3465E833B49859B13AC3F /* heart-filled@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "heart-filled@2x.png"; path = "../assets/icons/heart-filled@2x.png"; sourceTree = "<group>"; };
 		8C18146C05894374BA57F81D /* search@1x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "search@1x.png"; path = "../assets/icons/search@1x.png"; sourceTree = "<group>"; };
 		8C441C28A5F64ED28C723DB1 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
-		913B98387EEBFA3B9FD3FCD4 /* libPods-fansereCapstone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fansereCapstone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9156EA2984C94258956962DE /* compose@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "compose@3x.png"; path = "../assets/icons/compose@3x.png"; sourceTree = "<group>"; };
 		92F45A8B34CE42E797A325E4 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		93AF2E7924264AA2AE43B229 /* collections@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "collections@3x.png"; path = "../assets/icons/collections@3x.png"; sourceTree = "<group>"; };
@@ -554,7 +551,6 @@
 		D7866C6520CE4D489EA9B594 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		DC50C2AAFD534CBA96BADDAB /* home@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "home@2x.png"; path = "../assets/icons/home@2x.png"; sourceTree = "<group>"; };
 		E00CD19C631547E0825998BC /* categories@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "categories@3x.png"; path = "../assets/icons/categories@3x.png"; sourceTree = "<group>"; };
-		E5B930C4BBA199ABCF949898 /* Pods-fansereCapstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansereCapstone.debug.xcconfig"; path = "Target Support Files/Pods-fansereCapstone/Pods-fansereCapstone.debug.xcconfig"; sourceTree = "<group>"; };
 		EA25BA3D80FA4754882A8E8C /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		EA7AAAA18B2F4EF595ED7613 /* heart@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "heart@2x.png"; path = "../assets/icons/heart@2x.png"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -604,7 +600,6 @@
 				491657210DA242368628811A /* FBSDKCoreKit.framework in Frameworks */,
 				DAE4A21C284043B5A36DFD9C /* FBSDKShareKit.framework in Frameworks */,
 				B79614ADEB8344E2B321CF2C /* FBSDKLoginKit.framework in Frameworks */,
-				1FA5A46F75FCD91CEDCE9294 /* libPods-fansereCapstone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,8 +751,6 @@
 		1A60F15BA9CC7D859C870BFD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E5B930C4BBA199ABCF949898 /* Pods-fansereCapstone.debug.xcconfig */,
-				64985E3C3375D7E61BED1718 /* Pods-fansereCapstone.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -775,7 +768,6 @@
 				2107AE7BE2DB4C83B7C85098 /* FBSDKCoreKit.framework */,
 				24186D85F154468993BB28DD /* FBSDKShareKit.framework */,
 				6048703B1D2A4C8CA5DB2538 /* FBSDKLoginKit.framework */,
-				913B98387EEBFA3B9FD3FCD4 /* libPods-fansereCapstone.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1014,12 +1006,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "fansereCapstone" */;
 			buildPhases = (
-				8728E1A321D120649863996A /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				0A619D86A1FA8D74C375D82F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1598,28 +1588,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		0A619D86A1FA8D74C375D82F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-fansereCapstone/Pods-fansereCapstone-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fansereCapstone/Pods-fansereCapstone-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1633,28 +1601,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		8728E1A321D120649863996A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-fansereCapstone-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1788,7 +1734,6 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5B930C4BBA199ABCF949898 /* Pods-fansereCapstone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1817,7 +1762,6 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64985E3C3375D7E61BED1718 /* Pods-fansereCapstone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
