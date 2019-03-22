@@ -504,7 +504,8 @@ const styles = StyleSheet.create({
     borderWidth: .5,
     borderColor: "rgb(126, 217, 87)",
     marginTop: 6,
-   paddingRight: 5
+   paddingRight: 5,
+  
  },
  avatar: {
    width:50,
