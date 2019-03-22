@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, TextInput} from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
-import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
+import { Container, Content, Icon, Left, Body, Right, Button, Image } from 'native-base'
 import OtherUsers from './otherUsers'
 import Modal from 'react-native-modal'
 import { Header, Card } from 'react-native-elements'
@@ -15,13 +15,24 @@ export default class Feed extends React.Component {
       userName:'Sean Tansey',
       nearbyUsers: [],
       isModalVisible: false,
-      modalUser: {}
+      modalUser: {},
+      conversations: []
     }
     this.modalUser = this.modalUser.bind(this)
   }
 
   _toggleModal = () =>
      this.setState({ isModalVisible: !this.state.isModalVisible })
+
+     checkForUserId(arr) {
+       let result = null
+       for (let x = 0; x < arr.length; x++) {
+           if (arr[x].userId === this.state.userId) {
+               result = arr
+           }
+       }
+       return result
+   }
 
 
   componentDidMount() {
@@ -33,14 +44,30 @@ export default class Feed extends React.Component {
             userId: doc.id,
             data: doc.data()
           }
-          this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+          if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
+            this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+          }
         }
         )
       })
+      firebase.firestore().collection('conversations')
+        .onSnapshot(snapshot => {
+          let newDocs = snapshot.docChanges()
+          newDocs.forEach(doc => {
+            let releventInfo = this.checkForUserId(doc.doc.data().members)
+            if (releventInfo) {
+              let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
+              this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
+            }
+          })
+        })
+  }
+
+  removeUserFromState(arr, userId) {
+    return arr.filter(item => item.userId !== userId)
   }
 
   modalUser(userId, username, location, tagline) {
-    //console.log(userId, username, location, tagline)
     let user = {
       userId: userId,
       username: username,
@@ -53,21 +80,23 @@ export default class Feed extends React.Component {
   }
 
 
-//DATA STRUCTURE PROBLMES!!!!!!
+
   addToRoster(id, username) {
-    //console.log(id, username)
     firebase.firestore().collection('conversations').add({
-        members: {
-          0: {
-            userId: this.state.userId,
-            username: this.state.username
-          },
-          1: {
-            userId: id,
-            username: username
-          }
-        }
+      members: [
+        {
+         userId: this.state.userId,
+         username: this.state.userName,
+       },
+       {
+         userId: id,
+         username: username,
+       }
+      ]
       })
+      let newUserArr = this.removeUserFromState(this.state.nearbyUsers, id)
+      this.setState({nearbyUsers: newUserArr})
+      this._toggleModal()
   }
 
   render() {
@@ -83,14 +112,12 @@ export default class Feed extends React.Component {
         <View>
           <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
             <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.modalUser.username}</Text>
+            
             <Text style={{color: 'white', fontSize: 16}}>
-              Username:
+              Tagline: {this.state.modalUser.tagline}
             </Text>
             <Text style={{color: 'white', fontSize: 16}}>
-              Tagline:
-            </Text>
-            <Text style={{color: 'white', fontSize: 16}}>
-              Location:
+              Location: {this.state.modalUser.location}
             </Text>
             <Text style={{color: 'white', fontSize: 16}}>
               Teams:
