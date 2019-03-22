@@ -55,6 +55,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Noto Sans Bold.ttf</string>
+		<string>Noto Sans.ttf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -73,6 +75,26 @@
 		<string>Roboto_medium.ttf</string>
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb779794839045530</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>779794839045530</string>
+	<key>FacebookDisplayName</key>
+	<string>Fansere</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 </dict>
 </plist>

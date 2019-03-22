@@ -1,62 +1,48 @@
+// Login Sign Up pager
+
 import React from 'react'
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import firebase from 'firebase'
 
 export default class SignUp extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
-  }
 
-  inputEmail(email) {
-    //console.log(email)
-    this.setState({email: email})
-  }
+  state = { email: '', password: '', errorMessage: null }
 
-  inputPassword(password) {
-    //console.log(password)
-    this.setState({password: password})
-  }
+handleSignUp = () => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => this.props.navigation.navigate('Main'))
+    .catch(error => this.setState({ errorMessage: error.message }))
+}
+render() {
 
-  logIn() {
-    this.props.signIn(this.state.email, this.state.password)
-    this.setState({email: '', password: ''})
-  }
-
-  signUp() {
-    this.props.signUp(this.state.email, this.state.password)
-    this.setState({email: '', password: ''})
-  }
-
-  render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.label}>Email</Text>
+        <Text>Sign Up</Text>
+        {this.state.errorMessage &&
+          <Text style={{ color: 'red' }}>
+            {this.state.errorMessage}
+          </Text>}
         <TextInput
-          autoCorrect={false}
-          placeholder={'Please enter your email...'}
-          style={styles.input}
-          onChangeText={e => this.inputEmail(e)}
+          placeholder="Email"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
-        <Text style={styles.label}>Password</Text>
         <TextInput
-          autoCorrect={false}
-          placeholder={'Please enter your password...'}
-          style={styles.input}
-          onChangeText={e => this.inputPassword(e)}
-          value={this.state.password}
           secureTextEntry
+          placeholder="Password"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={password => this.setState({ password })}
+          value={this.state.password}
         />
+        <Button title="Sign Up" onPress={this.handleSignUp} />
         <Button
-          title="Login"
-          onPress={()=> this.logIn()}
-        />
-        <Button
-          title="Sign Up"
-          onPress={()=> this.signUp()}
+          title="Already have an account? Login"
+          onPress={() => this.props.navigation.navigate('Login')}
         />
       </View>
     )
@@ -66,27 +52,14 @@ export default class SignUp extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
-    width: '100%',
-    padding: 20,
-    backgroundColor: '#F5FCFF'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  label: {
-    padding: 5,
-    paddingBottom: 5,
-    color: 'blue',
-    fontSize: 17,
-    fontWeight: '700',
-    width: '100%'
-  },
-  input: {
-    paddingRight: 5,
-    paddingLeft: 5,
-    paddingBottom: 2,
-    color: '#333',
-    fontSize: 18,
-    width: '100%',
-    borderColor: '#ccc',
-    borderBottomWidth: 2
+  textInput: {
+    height: 40,
+    width: '90%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginTop: 8
   }
 })
