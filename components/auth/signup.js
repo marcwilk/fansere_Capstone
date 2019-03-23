@@ -44,6 +44,10 @@ render() {
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate('Login')}
         />
+        </View>
+        <View style={styles.image}>
+        <Image source={require('../../images/login.png')}/>
+        </View>
       </View>
     )
   }

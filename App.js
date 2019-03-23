@@ -1,8 +1,10 @@
+
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import { Container, Content, Icon, Thumbnail, Header, Left, Right, Body } from 'native-base'
 import firebase from 'firebase'
 import { createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
-
+import LogOut from './components/auth/logout'
 import Chatdisplay from './components/chat/chatDisplay'
 import Profiledisplay from './components/profile/profileDisplay'
 import Feed from './components/feed/mainFeed'
@@ -19,6 +21,8 @@ var config = {
   projectId: "fansere-application",
 };
 firebase.initializeApp(config);
+
+console.disableYellowBox = true;
 
 const TabNavigator = createBottomTabNavigator({
   // Main: { screen: props => <Main />},
