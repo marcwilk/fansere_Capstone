@@ -72,7 +72,7 @@ export default class Login extends React.Component {
                 });
               })
               .catch(error => {
-                alert("Please try again! " + error);
+                // alert("Please try again! " + error);
               });
           });
         }

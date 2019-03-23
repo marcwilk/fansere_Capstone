@@ -3,7 +3,7 @@ import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
-export default class splashScreen extends React.Component {
+export default class SplashScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>

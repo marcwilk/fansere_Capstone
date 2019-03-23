@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import firebase from 'firebase'
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
 
+import Chatdisplay from './components/chat/chatDisplay'
+import Profiledisplay from './components/profile/profileDisplay'
+import Feed from './components/feed/mainFeed'
+import Maps from './components/maps/maps'
 import Loading from './components/auth/Loading'
 import Login from './components/auth/Login'
 import Main from './components/auth/Main'
@@ -16,12 +20,40 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const TabNavigator = createBottomTabNavigator({
+  // Main: { screen: props => <Main />},
+  Profile: { screen: props => <Profiledisplay />},
+  Chat: { screen: props => <Chatdisplay />},
+  Map: { screen: props => <Maps />},
+  Feed: { screen: props => <Feed />}
+},
+{
+tabBarOptions: {
+    activeTintColor: '#7ed957',
+    inactiveTintColor: '#ffffff',
+    labelStyle: {
+    fontSize: 14,
+    },
+    style: {
+    backgroundColor: '#545454',
+    color: '#7ed957',
+    paddingTop: 5
+   },
+ },
+}
+
+
+
+
+)
+
 const App = createSwitchNavigator(
   {
     Loading,
     SignUp,
     Login,
-    Main
+    Main,
+    TabNavigator
   },
   {
     initialRouteName: 'Loading'
