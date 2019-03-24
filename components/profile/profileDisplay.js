@@ -237,7 +237,7 @@ onPressListItem=(team , logo)=>{
 
     return (
       <View style={{ flex: 1, backgroundColor: 'black' }}>
-        <Header backgroundColor='#7ed957' placement='center' centerComponent={{ text: 'Profile', style: { color: 'white', fontSize: 20, fontWeight: 'bold' }}}/>
+        <Header backgroundColor='#7ed957' placement='center' centerComponent={{ text: 'Profile', style: { color: 'white', fontSize: 20 }}}/>
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>

@@ -26,6 +26,7 @@ export default class SignUp extends React.Component {
   }
 
   signUp() {
+    console.log(this.state.email, this.state.password)
     this.props.signUp(this.state.email, this.state.password)
     this.setState({email: '', password: ''})
   }
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
   image: {
     alignItems: 'center',
     justifyContent: 'center',
-    aspectRatio: 1.05
   },
   buttonContainer: {
     margin: 40,
