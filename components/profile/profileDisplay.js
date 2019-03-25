@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, ScrollView, TextInput, Image } from 'react-native'
+import { View, StyleSheet, Text, ScrollView, TextInput, Image, Alert } from 'react-native'
 import { Button } from 'native-base'
 import { Header, Card, ListItem, Avatar } from 'react-native-elements'
 import Modal from 'react-native-modal'
@@ -27,10 +27,7 @@ export default class Profiledisplay extends React.Component {
       isNflModalVisible: false,
       isNbaModalVisible: false,
       isMlbModalVisible: false,
-      userNhlTeam: {},
-      userNbaTeam: {},
-      userMlbTeam: {},
-      userNflTeam: {},
+
     }
   }
 
@@ -110,6 +107,51 @@ export default class Profiledisplay extends React.Component {
         tagline: newTagline
       })
   }
+//submits user's nhl team to DB
+  submitNhlTeam(userNhlTeamObj){
+    firebase.firestore().collection('users')
+      .doc(this.state.userId)
+      .set({
+
+          nhlTeamName: userNhlTeamObj.nhlTeam,
+          nhlTeamLogo: userNhlTeamObj.nhlLogo
+
+      }, {merge: true})
+  }
+
+  submitNbaTeam(userNbaTeamObj){
+    firebase.firestore().collection('users')
+      .doc(this.state.userId)
+      .set({
+
+          nbaTeamName: userNbaTeamObj.nbaTeam,
+          nbaTeamLogo: userNbaTeamObj.nbaLogo
+
+      }, {merge: true})
+  }
+
+  submitMlbTeam(userMlbTeamObj){
+    firebase.firestore().collection('users')
+      .doc(this.state.userId)
+      .set({
+
+          mlbTeamName: userMlbTeamObj.mlbTeam,
+          mlbTeamLogo: userMlbTeamObj.mlbLogo
+
+      }, {merge: true})
+  }
+
+  submitNflTeam(userNflTeamObj){
+    firebase.firestore().collection('users')
+      .doc(this.state.userId)
+      .set({
+
+          nflTeamName: userNflTeamObj.nflTeam,
+          nflTeamLogo: userNflTeamObj.nflLogo
+
+      }, {merge: true})
+  }
+
 
   logOut() {
     firebase.auth().signOut()
@@ -124,7 +166,7 @@ export default class Profiledisplay extends React.Component {
   renderSection = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <Teams userTeams={this.state.userTeams}/>
+        <Teams  />
       )
     }
     if (this.state.activeIndex == 1) {
@@ -157,10 +199,73 @@ export default class Profiledisplay extends React.Component {
   onPressMlbListItem=()=>{
       this.setState({isMlbModalVisible: !this.state.isMlbModalVisible})
   }
+//the following 4 functions format data and send them up to submitLeagueNameTeam functions.
+onPressNbaTeam=(info)=>{
+  userNbaTeamObj ={}
+  userNbaTeamObj.nbaTeam =info.team,
+  userNbaTeamObj.nbaLogo = info.logo,
+  Alert.alert( `Hey ${this.state.username}!`, `are you sure you want to add the ${info.team} to your roster`,
+  [
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'OK', onPress: () => this.submitNbaTeam(userNbaTeamObj)},
+  ],
+  {cancelable: false},
+)
+}
 
-onPressListItem=(team , logo)=>{
-   console.log(team)
-   console.log(logo)
+onPressNhlTeam=(info)=>{
+  userNhlTeamObj ={}
+  userNhlTeamObj.nhlTeam =info.team,
+  userNhlTeamObj.nhlLogo = info.logo,
+  Alert.alert( `Hey ${this.state.username}!`, `are you sure you want to add the ${info.team} to your roster`,
+  [
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'OK', onPress: () => this.submitNhlTeam(userNhlTeamObj)},
+  ],
+  {cancelable: false},
+)
+}
+
+onPressNflTeam=(info)=>{
+  userNflTeamObj ={}
+  userNflTeamObj.nflTeam =info.team,
+  userNflTeamObj.nflLogo = info.logo,
+  Alert.alert( `Hey ${this.state.username}!`, `are you sure you want to add the ${info.team} to your roster`,
+  [
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'Ok', onPress: () => this.submitNflTeam(userNflTeamObj) },
+  ],
+  {cancelable: false},
+)
+}
+
+onPressMlbTeam=(info)=>{
+  userMlbTeamObj ={}
+  userMlbTeamObj.mlbTeam =info.team,
+  userMlbTeamObj.mlbLogo = info.logo,
+  Alert.alert( `Hey ${this.state.username}!`, `are you sure you want to add the ${info.team} to your roster`,
+  [
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'OK', onPress: () => this.submitMlbTeam(userMlbTeamObj)},
+  ],
+  {cancelable: false},
+)
 }
 
 
@@ -174,7 +279,7 @@ onPressListItem=(team , logo)=>{
           leftAvatar ={<Avatar rounded large source={{uri: info.logo}} height={80} width={80}  aspectRatio={1.5}/>}
           avatarStyle={styles.avatar}
           style={styles.list}
-          onPress={e => this.onPressListItem(info)}
+          onPress={e => this.onPressNbaTeam(info)}
           containerStyle={{backgroundColor: 'black'}}
           titleStyle={{ color: 'white', fontWeight: 'bold' }}
           chevron chevronColor="black"
@@ -191,12 +296,12 @@ onPressListItem=(team , logo)=>{
           title={info.team}
           leftAvatar ={<Avatar rounded large source={{uri: info.logo}} height={80} width={80}  aspectRatio={1.5}/>}
           style={styles.list}
-          onPress={e => this.onPressListItem(info.team, info.logo)}
+          onPress={e => this.onPressNhlTeam(info)}
           containerStyle={{backgroundColor: 'black'}}
           titleStyle={{ color: 'white', fontWeight: 'bold' }}
           chevron chevronColor="black"
         />
-          <Image leftAvatar={info.logo}  />
+
       </View>)
   }
 //Render NFL Teams
@@ -208,7 +313,7 @@ onPressListItem=(team , logo)=>{
           title={info.team}
           leftAvatar ={<Avatar rounded large source={{uri: info.logo}} height={80} width={80}  aspectRatio={1.5}/>}
           style={styles.list}
-          onPress={e => this.onPressListItem(info.team, info.logo)}
+          onPress={e => this.onPressNflTeam(info)}
           containerStyle={{backgroundColor: 'black'}}
           titleStyle={{ color: 'white', fontWeight: 'bold' }}
           chevron chevronColor="black"
@@ -224,7 +329,7 @@ onPressListItem=(team , logo)=>{
           title={info.team}
           leftAvatar ={<Avatar rounded large source={{uri: info.logo}} height={80} width={80}  aspectRatio={1.5}/>}
           style={styles.list}
-          onPress={e => this.onPressListItem(info.team, info.logo)}
+          onPress={e => this.onPressMlbTeam(info)}
           containerStyle={{backgroundColor: 'black'}}
           titleStyle={{ color: 'white', fontWeight: 'bold' }}
           chevron chevronColor="black"
@@ -246,16 +351,16 @@ onPressListItem=(team , logo)=>{
               <View style={{ flex: 3 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end' }}>
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white' }}>20</Text>
-                    <Text style={{ fontSize: 12, color: 'white' }}>Roster</Text>
+                    <Text style={{ color: 'white' }}>4</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Teams</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
                     <Text style={{ color: 'white' }}>205</Text>
-                    <Text style={{ fontSize: 12, color: 'white' }}>Posts</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Roster</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
                     <Text style={{ color: 'white' }}>167</Text>
-                    <Text style={{ fontSize: 12, color: 'white' }}>Check-Ins</Text>
+                    <Text style={{ fontSize: 12, color: 'white' }}>Users</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'flex-start', paddingTop: 10 }}>
