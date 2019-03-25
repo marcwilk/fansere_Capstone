@@ -12,7 +12,7 @@ import Maps from './components/maps/maps'
 import Loading from './components/auth/Loading'
 import Login from './components/auth/Login'
 import Main from './components/auth/Main'
-import SignUp from './components/auth/SignUp'
+import SignUp from './components/auth/signup'
 // import TabNavigator from './components/router'
 // Initialize Firebase
 var config = {
