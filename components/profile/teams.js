@@ -1,30 +1,88 @@
 import React from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ListView, Image } from 'react-native'
+import { ListItem, Avatar} from 'react-native-elements'
 import firebase from 'firebase'
 import 'firebase/firestore'
 
 export default class Teams extends React.Component {
+
   constructor(props) {
     super(props)
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      teamList: [
-         {image: 'http://content.sportslogos.net/logos/6/229/full/8926_denver_nuggets-primary-2019.png', teamname:'Denver Nuggets'},
-         {image: 'http://content.sportslogos.net/logos/18/275/full/5990.gif', teamname:'The Denver Nuggets'},
-         {image: 'http://content.sportslogos.net/logos/6/229/full/qdcpbu7weno1htqgg5kk10i8o.gif', teamname:'Nuggets of Denver'},
-         {image: 'http://content.sportslogos.net/logos/18/275/full/5213.gif', teamname:'Your Denver Nuggets'},
-         {image: 'http://content.sportslogos.net/logos/6/229/full/4681_denver_nuggets-alternate-2019.png', teamname:'Nuggets'},
-         {image: 'http://content.sportslogos.net/logos/6/229/full/tht30q65rj1sca9rhsq5zfoih.gif', teamname:'You Know It'},
-      ]
-
+      userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
+      userData: []
     }
   }
+
+componentDidMount(){
+  firebase.firestore().collection('users')
+  .doc(this.state.userId)
+   .onSnapshot(snapshot=>{
+         this.setState({userData: snapshot.data()})
+     })
+ }
+
+renderUserTeams=()=>{
+  let mlb ={}
+  let nhl ={}
+  let nfl ={}
+  let nba ={}
+  let arr= []
+for (key in this.state.userData){
+  mlb.Team = this.state.userData.mlbTeamName,
+  mlb.Logo = this.state.userData.mlbTeamLogo,
+  nhl.Team = this.state.userData.nhlTeamName,
+  nhl.Logo = this.state.userData.nhlTeamLogo,
+  nfl.Team = this.state.userData.nflTeamName,
+  nfl.Logo = this.state.userData.nflTeamLogo,
+  nba.Team = this.state.userData.nbaTeamName,
+  nba.Logo = this.state.userData.nbaTeamLogo
+}
+if (Object.values(nhl).includes(undefined)){
+  nhl.Team='Pick Your Favorite Hockey Team',
+  nhl.Logo='../../images/logo.png'
+} else{
+  arr.push(nhl)
+}
+if (Object.values(nba).includes(undefined)){
+  nba.Team='Pick Your Favotite Basketball Team',
+  nba.Logo='../../images/logo.png'
+} else {
+  arr.push(nba)
+}
+if (Object.values(nfl).includes(undefined)){
+  nfl.Team='Pick Your Favotite Football Team',
+  nfl.Logo='../../images/logo.png'
+} else {
+  arr.push(nfl)
+}
+if (Object.values(mlb).includes(undefined)){
+  mlb.Team='Pick Your Favotite Baseball Team',
+  mlb.Logo='../../images/logo.png'
+} else{
+  arr.push(mlb)
+}
+return arr.map((info, i)=><View>
+  <ListItem
+    key={i}
+    title={info.Team}
+    leftAvatar ={<Avatar rounded large source={{uri: info.Logo}} height={80} width={80}  aspectRatio={1.5}/>}
+    style={styles.list}
+    containerStyle={{backgroundColor: 'black'}}
+    titleStyle={{ color: 'white', fontWeight: 'bold' }}
+  />
+</View>)
+}
+
+
+
 
 
 
 
 
     render() {
+
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -35,16 +93,7 @@ export default class Teams extends React.Component {
               </View>
             </View>
             <View style={styles.body}>
-              <ListView style={styles.container} enableEmptySections={true}
-                dataSource={this.ds.cloneWithRows(this.state.teamList)}
-                renderRow={(user) => {
-                  return (
-                      <View style={styles.box}>
-                      <Image style={styles.image} source={{uri: user.image}}/>
-                        <Text style={styles.teamname} >{user.teamname}</Text>
-                      </View>
-                  )
-              }}/>
+              {this.renderUserTeams()}
             </View>
         </View>
       </ScrollView>
@@ -85,7 +134,7 @@ const styles = StyleSheet.create({
   body: {
     width: '100%',
     padding: 30,
-    backgroundColor :'#a6a6a6'
+    backgroundColor :'black'
   },
   box: {
     padding:5,
@@ -106,5 +155,11 @@ const styles = StyleSheet.create({
     fontSize:20,
     alignSelf:'center',
     marginLeft:10
-  }
+  },
+  list: {
+    borderWidth: .5,
+    borderColor: "rgb(126, 217, 87)",
+    marginTop: 6,
+   paddingRight: 5
+ },
 })
