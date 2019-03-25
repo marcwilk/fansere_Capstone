@@ -9,7 +9,7 @@ export default class Teams extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
+      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       userData: []
     }
   }

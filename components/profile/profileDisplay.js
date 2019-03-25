@@ -14,7 +14,7 @@ export default class Profiledisplay extends React.Component {
     this.state = {
       activeIndex: 0,
       isModalVisable: false,
-      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
+      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       username: null,
       location: null,
       tagline: null,
@@ -105,7 +105,7 @@ export default class Profiledisplay extends React.Component {
         username: newUsername,
         location: newLocation,
         tagline: newTagline
-      })
+      }, {merge: true})
   }
 //submits user's nhl team to DB
   submitNhlTeam(userNhlTeamObj){
