@@ -97,7 +97,7 @@ export default class Chatdisplay extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         {this.state.showChat ? <Chat addMessage={this.addMessage} hideChat={this.hideChat} messages={this.state.chats} userId={this.state.userId} chatName={this.state.chatName}/> : <Chatlist setChatId={this.setChatId} setChatName={this.setChatName} conversations={this.state.conversations} pressChat={this.onPressChat} showChat={this.showChat}/>}
       </View>
     )
@@ -106,8 +106,8 @@ export default class Chatdisplay extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
-    width: '100%',
-    padding: 20,
+    flex:1,
+    backgroundColor: 'black',
+    color: 'black'
   }
 })

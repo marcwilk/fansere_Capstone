@@ -101,7 +101,7 @@ export default class Feed extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
       <Header
           backgroundColor="rgb(126, 217, 75)"
           centerComponent={{ text: 'Nearby Users', style: { color: '#fff', fontSize: 22} }}
@@ -142,5 +142,9 @@ export default class Feed extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex:1,
+    backgroundColor: 'black',
+    color: 'black'
+  }
 });

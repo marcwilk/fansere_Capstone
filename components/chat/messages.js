@@ -23,5 +23,4 @@ export default class Messanges extends React.Component {
 
 const styles = StyleSheet.create({
   navHeight: { marginBottom: 10},
-  
 })
