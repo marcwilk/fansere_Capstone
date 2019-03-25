@@ -16,7 +16,7 @@ export default class OtherUsers extends React.Component {
 
   onPressListItem(id, data) {
     //console.log(id, data)
-    this.props.modalUser(id, data.username, data.location, data.tagline)
+    this.props.modalUser(id, data.username, data.location, data.tagline )
     this.props.toggle()
   }
 

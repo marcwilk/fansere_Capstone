@@ -58,6 +58,7 @@ export default class Feed extends React.Component {
           .get()
           .then(snapshot => {
             snapshot.forEach(doc => {
+
               let userObj = {
                 userId: doc.id,
                 data: doc.data()
@@ -75,6 +76,7 @@ export default class Feed extends React.Component {
   }
 
   modalUser(userId, username, location, tagline) {
+
     let user = {
       userId: userId,
       username: username,
@@ -106,7 +108,12 @@ export default class Feed extends React.Component {
       this._toggleModal()
   }
 
+  renderTeams=()=>{
+
+  }
+
   render() {
+
     return (
       <View>
       <Header
@@ -126,9 +133,7 @@ export default class Feed extends React.Component {
             <Text style={{color: 'white', fontSize: 16}}>
               Location: {this.state.modalUser.location}
             </Text>
-            <Text style={{color: 'white', fontSize: 16}}>
-              Teams:
-            </Text>
+
             <View style={{ flexDirection: 'row', paddingTop: 10 }}>
             <Button success style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30 }}
               onPress= { () => this.addToRoster(this.state.modalUser.userId, this.state.modalUser.username) }>
@@ -139,6 +144,7 @@ export default class Feed extends React.Component {
               <Text style= {styles.modalText }>Close</Text>
             </Button>
             </View>
+            {this.renderTeams()}
           </Card>
           </View>
         </Modal>
