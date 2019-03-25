@@ -34,11 +34,10 @@ export default class Profiledisplay extends React.Component {
 
   componentDidMount() {
        firebase.firestore().collection('users')
-         .doc(`${this.props.userId}`)
+         .doc(this.state.userId)
          .onSnapshot(snapshot => {
            //console.log(snapshot.data())
            let data = snapshot.data()
-           //console.log(data)
            this.setState({location: data.location, tagline: data.tagline, username: data.username, picture: data.picture})
            //console.log(this.state.location)
          })
@@ -446,7 +445,7 @@ onPressMlbTeam=(info)=>{
 
 
                     <Modal isVisible={this.state.isSportsModalVisible} style={{paddingRight: 30}}>
-                      <Card containerStyle={{width: "100%", height: "45%",  backgroundColor: 'black'}}>
+                      <Card containerStyle={{width: "100%", height: "70%",  backgroundColor: 'black'}}>
                         <View >
                           <ListItem leftAvatar={{source:require('../../images/nhl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NHL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNhlListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/nfl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NFL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNflListItem()} isVisible={this.state.isSportsModalVisible}/>
@@ -462,53 +461,47 @@ onPressMlbTeam=(info)=>{
 
                         <Modal isVisible={this.state.isNflModalVisible} style={{paddingRight: 30}}>
                           <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
+                          <Button style={styles.addTeamsButton}  onPress={this.onPressNflListItem} >
+                            <Text>Close</Text>
+                          </Button>
                           <ScrollView>
                              {this.renderNflTeams()}
                           </ScrollView>
-                          <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                            <Button style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
-                              <Text style={{color: 'black'}}>Close</Text>
-                            </Button>
-                          </View>
                         </Card>
                       </Modal>
 
                       <Modal isVisible={this.state.isNhlModalVisible} style={{paddingRight: 30}}>
                         <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
+                        <Button style={styles.addTeamsButton}  onPress={this.onPressNhlListItem} >
+                          <Text>Close</Text>
+                          </Button>
                           <ScrollView>
                             {this.renderNhlTeams()}
                           </ScrollView>
-                          <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                            <Button style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
-                              <Text style={{color: 'black'}}>Close</Text>
-                            </Button>
-                          </View>
                       </Card>
                     </Modal>
 
                     <Modal isVisible={this.state.isMlbModalVisible} style={{paddingRight: 30}}>
                       <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
+                      <Button style={styles.addTeamsButton}  onPress={this.onPressMlbListItem} >
+                        <Text>Close</Text>
+                        </Button>
                         <ScrollView>
                             {this.renderMlbTeams()}
                         </ScrollView>
-                        <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                          <Button style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
-                            <Text style={{color: 'black'}}>Close</Text>
-                          </Button>
-                        </View>
+
                     </Card>
                   </Modal>
 
                   <Modal isVisible={this.state.isNbaModalVisible} style={{paddingRight: 30}}>
                     <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
+                    <Button style={styles.addTeamsButton}  onPress={this.onPressNbaListItem} >
+                      <Text>Close</Text>
+                      </Button>
                       <ScrollView>
                           {this.renderNbaTeams()}
                       </ScrollView>
-                      <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                        <Button style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
-                          <Text style={{color: 'black'}}>Close</Text>
-                        </Button>
-                      </View>
+
                   </Card>
                 </Modal>
 
