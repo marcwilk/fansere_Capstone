@@ -75,12 +75,6 @@ return arr.map((info, i)=><View>
 }
 
 
-
-
-
-
-
-
     render() {
 
     return (
