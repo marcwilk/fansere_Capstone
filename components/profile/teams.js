@@ -9,14 +9,13 @@ export default class Teams extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       userData: []
     }
   }
 
 componentDidMount(){
   firebase.firestore().collection('users')
-  .doc(this.state.userId)
+  .doc(this.props.userId)
    .onSnapshot(snapshot=>{
          this.setState({userData: snapshot.data()})
      })
@@ -82,7 +81,7 @@ return arr.map((info, i)=><View>
         <View style={styles.container}>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <Image style={styles.avatar} source={require('../../images/logo.png')}/>
+                <Image style={styles.avatar} source={{uri: `${this.props.picture}`}}/>
                 <Text style={styles.name}>My Teams</Text>
               </View>
             </View>

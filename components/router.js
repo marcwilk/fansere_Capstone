@@ -9,10 +9,10 @@ import Maps from './maps/maps'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const TabNavigator = createBottomTabNavigator({
-  Chat: { screen: props => <Chatdisplay />},
-  Profile: { screen: props => <Profiledisplay />},
+  Chat: { screen: props => <Chatdisplay userId={props.screenProps.userId}/>},
   Map: { screen: props => <Maps />},
-  Users: { screen: props => <Feed />}
+  Profile: { screen: props => <Profiledisplay userId={props.screenProps.userId}/>},
+  Users: { screen: props => <Feed userId={props.screenProps.userId}/>}
   },
   {
     initialRouteName: 'Profile',

@@ -11,8 +11,8 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
-      userName:'Fansere Guy',
+      userId: `${this.props.userId}`,
+      userName:'',
       nearbyUsers: [],
       isModalVisible: false,
       modalUser: {},
@@ -50,7 +50,7 @@ export default class Feed extends React.Component {
               //this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
             }
             this.setState({conversations: conversations})
-            console.log(this.state.conversations)
+            //console.log(this.state.conversations)
           })
         })
         firebase.firestore().collection('users')
@@ -69,6 +69,14 @@ export default class Feed extends React.Component {
             }
             )
           })
+          // make a call to get username
+          firebase.firestore().collection('users')
+            .doc(`${this.state.userId}`)
+            .get()
+            .then(snapshot =>
+              this.setState({userName: snapshot.data().username})
+            )
+
   }
 
   removeUserFromState(arr, userId) {
