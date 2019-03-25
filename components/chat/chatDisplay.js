@@ -9,11 +9,7 @@ export default class Chatdisplay extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-<<<<<<< HEAD
-      userId: 'WbnNM1HOlxSITQTPnkjY2R7dYOJ3',
-=======
       userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
->>>>>>> 88b46cd3a81ae4effdaba9e4c5efc437ccc73654
       conversations: [],
       chats: [],
       showChat: false,
