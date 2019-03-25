@@ -18,6 +18,7 @@ export default class Profiledisplay extends React.Component {
       username: null,
       location: null,
       tagline: null,
+      picture: null,
       NHLTeams: [],
       NFLTeams: [],
       NBATeams: [],
@@ -37,7 +38,7 @@ export default class Profiledisplay extends React.Component {
          .onSnapshot(snapshot => {
            //console.log(snapshot.data())
            let data = snapshot.data()
-           this.setState({location: data.location, tagline: data.tagline, username: data.username})
+           this.setState({location: data.location, tagline: data.tagline, username: data.username, picture: data.picture})
            //console.log(this.state.location)
          })
 
@@ -98,13 +99,18 @@ export default class Profiledisplay extends React.Component {
     this.setState({ tagline: text })
   }
 
-  submitProfile(newUsername, newLocation, newTagline){
+  updatePicture = (text) => {
+    this.setState({ picture: text })
+  }
+
+  submitProfile(newUsername, newLocation, newTagline, newPicture){
     firebase.firestore().collection('users')
       .doc(this.state.userId)
       .set({
         username: newUsername,
         location: newLocation,
-        tagline: newTagline
+        tagline: newTagline,
+        picture: newPicture
       }, {merge: true})
   }
 //submits user's nhl team to DB
@@ -166,7 +172,7 @@ export default class Profiledisplay extends React.Component {
   renderSection = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <Teams  />
+        <Teams  userId={this.state.userId}/>
       )
     }
     if (this.state.activeIndex == 1) {
@@ -346,7 +352,7 @@ onPressMlbTeam=(info)=>{
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <Image source={require('../../images/logo.png')} style={styles.profileImage} />
+                <Image source={{uri: `${this.state.picture}`}} style={styles.profileImage} />
               </View>
               <View style={{ flex: 3 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end' }}>
@@ -408,9 +414,21 @@ onPressMlbTeam=(info)=>{
                           value = {this.state.tagline}
                           onChangeText={this.updateTagline}
                         />
+                        <Text style={{color: 'white', fontSize: 16}}>
+                          Picture (url):
+                        </Text>
+                        <TextInput
+                          underlineColorAndroid = 'transparent'
+                          placeholder = {this.state.picture}
+                          placeholderTextColor = 'white'
+                          autoCapitalize = 'none'
+                          style={styles.textInput}
+                          value = {this.state.picture}
+                          onChangeText={this.updatePicture}
+                        />
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                         <Button light style={styles.button}
-                          onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline) }>
+                          onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline, this.state.picture) }>
                           <Text style = {styles.submitButtonText}>Submit Changes</Text>
                         </Button>
                         <Button danger style={styles.button}
