@@ -14,7 +14,7 @@ export default class Profiledisplay extends React.Component {
     this.state = {
       activeIndex: 0,
       isModalVisable: false,
-      userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
+      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
       username: null,
       location: null,
       tagline: null,
@@ -129,7 +129,7 @@ export default class Profiledisplay extends React.Component {
     }
     if (this.state.activeIndex == 1) {
       return (
-        <Roster />
+        <Roster userId={this.state.userId}/>
       )
     }
   }
