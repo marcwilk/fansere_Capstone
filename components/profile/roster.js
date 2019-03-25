@@ -146,7 +146,7 @@ return arr.map((info, i)=><View>
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.headerContent}>
-                <Image style={styles.avatar} source={require('../../images/logo.png')}/>
+                <Image style={styles.avatar} source={{uri: `${this.props.picture}`}}/>
                 <Text style={styles.name}>My Roster</Text>
             </View>
           </View>
