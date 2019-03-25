@@ -49,7 +49,8 @@ export default class Feed extends React.Component {
         })
         firebase.firestore().collection('users')
           .where('location', '==', 'Denver')
-          .onSnapshot(snapshot => {
+          .get()
+          .then(snapshot => {
             snapshot.forEach(doc => {
               let userObj = {
                 userId: doc.id,
