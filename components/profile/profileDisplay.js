@@ -14,7 +14,7 @@ export default class Profiledisplay extends React.Component {
     this.state = {
       activeIndex: 0,
       isModalVisable: false,
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
+      userId: `${this.props.userId}`,
       username: null,
       location: null,
       tagline: null,
@@ -34,10 +34,11 @@ export default class Profiledisplay extends React.Component {
 
   componentDidMount() {
        firebase.firestore().collection('users')
-         .doc(this.state.userId)
+         .doc(`${this.props.userId}`)
          .onSnapshot(snapshot => {
            //console.log(snapshot.data())
            let data = snapshot.data()
+           //console.log(data)
            this.setState({location: data.location, tagline: data.tagline, username: data.username, picture: data.picture})
            //console.log(this.state.location)
          })
@@ -172,12 +173,12 @@ export default class Profiledisplay extends React.Component {
   renderSection = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <Teams  userId={this.state.userId}/>
+        <Teams  userId={this.state.userId} picture={this.state.picture}/>
       )
     }
     if (this.state.activeIndex == 1) {
       return (
-        <Roster userId={this.state.userId}/>
+        <Roster userId={this.state.userId} picture={this.state.picture}/>
       )
     }
   }
