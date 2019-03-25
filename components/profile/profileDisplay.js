@@ -34,11 +34,10 @@ export default class Profiledisplay extends React.Component {
 
   componentDidMount() {
        firebase.firestore().collection('users')
-         .doc(`${this.props.userId}`)
+         .doc(this.state.userId)
          .onSnapshot(snapshot => {
            //console.log(snapshot.data())
            let data = snapshot.data()
-           //console.log(data)
            this.setState({location: data.location, tagline: data.tagline, username: data.username, picture: data.picture})
            //console.log(this.state.location)
          })
@@ -376,7 +375,7 @@ onPressMlbTeam=(info)=>{
                       <Text style={{ color: 'black' }}>Edit Profile</Text>
                     </Button>
                     <Modal isVisible={this.state.isModalVisible}>
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                       <Card containerStyle={{width: 350, padding: 10, backgroundColor: 'black'}}>
                         <Text style={styles.editProfile}> Edit Profile </Text>
                         <Text style={{color: 'white', fontSize: 16}}>
@@ -428,11 +427,11 @@ onPressMlbTeam=(info)=>{
                           onChangeText={this.updatePicture}
                         />
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                        <Button light style={styles.button}
+                        <Button light style={styles.submitButton}
                           onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline, this.state.picture) }>
                           <Text style = {styles.submitButtonText}>Submit Changes</Text>
                         </Button>
-                        <Button danger style={styles.button}
+                        <Button style={styles.closeButton}
                           onPress= {this.toggleModal}>
                           <Text style= {styles.modalText }>Close</Text>
                         </Button>
@@ -440,28 +439,30 @@ onPressMlbTeam=(info)=>{
                       </Card>
                       </View>
                     </Modal>
-                    <Button light style={styles.addTeamsButton} onPress={this.toggleSportsModal}>
+                    <Button light style={styles.editTeamsButton} onPress={this.toggleSportsModal}>
                       <Text style={{ color: 'black' }}>Edit Teams</Text>
                     </Button>
 
 
                     <Modal isVisible={this.state.isSportsModalVisible} style={{paddingRight: 30}}>
-                      <Card containerStyle={{width: "100%", height: "45%",  backgroundColor: 'black'}}>
-                        <Button light style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
-                          <Text>$1</Text>
-                        </Button>
+                      <Card containerStyle={{width: "100%", height: "70%",  backgroundColor: 'black'}}>
                         <View >
                           <ListItem leftAvatar={{source:require('../../images/nhl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NHL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNhlListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/nfl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NFL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNflListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/mlb.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'MLB '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressMlbListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/nba.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NBA '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNbaListItem()} isVisible={this.state.isSportsModalVisible}/>
+                          <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                            <Button style={styles.addTeamsButton} isVisible={this.state.isSportsModalVisible} onPress={this.toggleSportsModal}>
+                              <Text style={{color: 'black'}}>Close</Text>
+                            </Button>
+                          </View>
                         </View>
                         </Card>
 
-                        <Modal  isVisible={this.state.isNflModalVisible} style={{paddingRight: 30}}>
+                        <Modal isVisible={this.state.isNflModalVisible} style={{paddingRight: 30}}>
                           <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                          <Button light style={styles.addTeamsButton}  onPress={this.onPressNflListItem} >
-                            <Text>$1</Text>
+                          <Button style={styles.addTeamsButton}  onPress={this.onPressNflListItem} >
+                            <Text>Close</Text>
                           </Button>
                           <ScrollView>
                              {this.renderNflTeams()}
@@ -469,10 +470,10 @@ onPressMlbTeam=(info)=>{
                         </Card>
                       </Modal>
 
-                      <Modal  isVisible={this.state.isNhlModalVisible} style={{paddingRight: 30}}>
+                      <Modal isVisible={this.state.isNhlModalVisible} style={{paddingRight: 30}}>
                         <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                        <Button light style={styles.addTeamsButton}  onPress={this.onPressNhlListItem} >
-                          <Text>$1</Text>
+                        <Button style={styles.addTeamsButton}  onPress={this.onPressNhlListItem} >
+                          <Text>Close</Text>
                           </Button>
                           <ScrollView>
                             {this.renderNhlTeams()}
@@ -480,10 +481,10 @@ onPressMlbTeam=(info)=>{
                       </Card>
                     </Modal>
 
-                    <Modal  isVisible={this.state.isMlbModalVisible} style={{paddingRight: 30}}>
+                    <Modal isVisible={this.state.isMlbModalVisible} style={{paddingRight: 30}}>
                       <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                      <Button light style={styles.addTeamsButton}  onPress={this.onPressMlbListItem} >
-                        <Text>$1</Text>
+                      <Button style={styles.addTeamsButton}  onPress={this.onPressMlbListItem} >
+                        <Text>Close</Text>
                         </Button>
                         <ScrollView>
                             {this.renderMlbTeams()}
@@ -492,10 +493,10 @@ onPressMlbTeam=(info)=>{
                     </Card>
                   </Modal>
 
-                  <Modal  isVisible={this.state.isNbaModalVisible} style={{paddingRight: 30}}>
+                  <Modal isVisible={this.state.isNbaModalVisible} style={{paddingRight: 30}}>
                     <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                    <Button light style={styles.addTeamsButton}  onPress={this.onPressNbaListItem} >
-                      <Text>$1</Text>
+                    <Button style={styles.addTeamsButton}  onPress={this.onPressNbaListItem} >
+                      <Text>Close</Text>
                       </Button>
                       <ScrollView>
                           {this.renderNbaTeams()}
@@ -510,7 +511,7 @@ onPressMlbTeam=(info)=>{
 
 
 
-                    <Button danger style={styles.logout} onPress={() => this.logOut()}>
+                    <Button style={styles.logout} onPress={() => this.logOut()}>
                       <Text style={{ color: 'black' }}>Logout</Text>
                     </Button>
                   </View>
@@ -561,7 +562,7 @@ const styles = StyleSheet.create({
     height: 75,
     borderRadius: 37.5,
     borderWidth: 2,
-    borderColor: '#fff'
+    borderColor: '#7ed957'
   },
   editProfileText: {
     color: 'white',
@@ -586,11 +587,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: 'black'
   },
-  button: {
+  submitButton: {
     flex: 3,
     margin: 10,
     justifyContent: 'center',
-    height: 30
+    height: 30,
+    backgroundColor: 'white'
+  },
+  closeButton: {
+    flex: 3,
+    margin: 10,
+    justifyContent: 'center',
+    height: 30,
+    backgroundColor: '#7ed957'
   },
   textInput: {
     height: 40,
@@ -616,13 +625,21 @@ const styles = StyleSheet.create({
     height: 30,
     marginRight: 10,
     marginLeft: 5,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#7ed957',
+  },
+  editTeamsButton: {
+    flex: 2,
+    marginLeft: 5,
+    justifyContent: 'center',
+    height: 30
   },
   addTeamsButton: {
-  flex: 2,
-  marginLeft: 5,
-  justifyContent: 'center',
-  height: 30,
+    flex: 2,
+    marginLeft: 5,
+    justifyContent: 'center',
+    height: 30,
+    backgroundColor: '#7ed957'
   },
   list: {
     borderWidth: .5,
@@ -633,6 +650,5 @@ const styles = StyleSheet.create({
  avatar: {
    width:50,
    height: 50,
-
  }
 })

@@ -53,7 +53,10 @@ export default class App extends Component {
         console.log(user.email)
         console.log(user.uid)
         this.setState({userId: user.uid})
+        
+
         this.setState({userEmail: user.email})
+
       } else {
         console.log('no user signed in')
         this.setState({userEmail: null})

@@ -83,7 +83,7 @@ renderRosterList(chatArr) {
                                     containerStyle={{backgroundColor: 'black'}}
                                     titleStyle={{ color: 'white', fontWeight: 'bold' }}
                                     onPress={e => this.pullUserInfo(info.userId)}
-                                    chevron chevronColor="black"
+                                    chevron chevronColor="white"
                                     />)
 }
 
@@ -131,7 +131,7 @@ return arr.map((info, i)=><View>
   <ListItem
     key={i}
     title={info.Team}
-    leftAvatar ={<Avatar rounded large source={{uri: info.Logo}} height={80} width={80}  aspectRatio={1.5}/>}
+    leftAvatar ={<Avatar rounded large source={{uri: info.Logo}} height={80} width={80} aspectRatio={1.5}/>}
     style={styles.list}
     containerStyle={{backgroundColor: 'black'}}
     titleStyle={{ color: 'white', fontWeight: 'bold' }}
@@ -156,31 +156,28 @@ return arr.map((info, i)=><View>
             <View >
             <Modal isVisible={this.state.isModalVisible} style={{paddingRight: 30}}>
             <View>
-              <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
+              <Card containerStyle={{width: "100%", height: "95%",  backgroundColor: 'black'}}>
               <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.userForModal.username}</Text>
               <View style={{alignItems: 'center'}}>
               <Image
-                style={{width: 200, height: 140, textAlign: 'center'}}
+                style={{width: 200, height: 200, borderRadius: 100, borderWidth: 2, textAlign: 'center', borderColor: '#7ed957'}}
                 source={{uri: `${this.state.userForModal.picture}`}}
               />
               </View>
-              <Text style={{color: 'white', fontSize: 16}}>
+              <Text style={{color: 'white', fontSize: 16, padding: 5, fontWeight: 'bold', textAlign: 'center'}}>
                 Tagline: {this.state.userForModal.tagline}
               </Text>
-              <Text style={{color: 'white', fontSize: 16}}>
+              <Text style={{color: 'white', fontSize: 16, padding: 5, fontWeight: 'bold', textAlign: 'center'}}>
                 Location: {this.state.userForModal.location}
               </Text>
-              <Text style={{color: 'white', fontSize: 16}}>
-                Teams:
-              </Text>
-                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                <Button danger style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30 }}
-                  onPress= {this.closeModal}>
-                  <Text style= {styles.modalText }>Close</Text>
-                </Button>
-
-                </View>
                  {this.renderTeams()}
+                 <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                 <Button style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30, backgroundColor: '#7ed957' }}
+                 onPress= {this.closeModal}>
+                 <Text style= {styles.modalText }>Close</Text>
+                 </Button>
+
+                 </View>
               </Card>
               </View>
             </Modal>
@@ -197,19 +194,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   header: {
-    backgroundColor: '#545454',
-    width: '100%'
+    backgroundColor: 'black',
+    width: '100%',
+    borderColor: 'white',
+    borderWidth: 1
   },
   headerContent: {
     padding: 10,
     alignItems: 'center'
+  },
+  modalText: {
+    color: 'black'
   },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#7ed957',
     marginBottom: 10
   },
   image: {
@@ -223,8 +225,10 @@ const styles = StyleSheet.create({
   },
   body: {
     width: '100%',
-    padding:30,
-    backgroundColor :'#a6a6a6'
+    padding: 30,
+    backgroundColor:'black',
+    borderColor: 'white',
+    borderWidth: 1
   },
   box: {
     padding:5,
@@ -232,7 +236,6 @@ const styles = StyleSheet.create({
     marginBottom:1,
     borderWidth: 1,
     borderColor: '#7ed957',
-    //backgroundColor: '#fff',
     flexDirection: 'row',
     shadowColor: 'black',
     shadowOpacity: .2,
