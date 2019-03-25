@@ -15,6 +15,7 @@ const TabNavigator = createBottomTabNavigator({
   Users: { screen: props => <Feed />}
   },
   {
+    initialRouteName: 'Profile',
     defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       const { routeName } = navigation.state;

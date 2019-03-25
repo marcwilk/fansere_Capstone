@@ -14,7 +14,7 @@ export default class Profiledisplay extends React.Component {
     this.state = {
       activeIndex: 0,
       isModalVisable: false,
-      userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
+      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
       username: null,
       location: null,
       tagline: null,
@@ -171,7 +171,7 @@ export default class Profiledisplay extends React.Component {
     }
     if (this.state.activeIndex == 1) {
       return (
-        <Roster />
+        <Roster userId={this.state.userId}/>
       )
     }
   }
@@ -342,7 +342,7 @@ onPressMlbTeam=(info)=>{
 
     return (
       <View style={{ flex: 1, backgroundColor: 'black' }}>
-        <Header backgroundColor='#7ed957' placement='center' centerComponent={{ text: 'Profile', style: { color: 'white', fontSize: 20, fontWeight: 'bold' }}}/>
+        <Header backgroundColor='#7ed957' placement='center' centerComponent={{ text: 'Profile', style: { color: 'white', fontSize: 20 }}}/>
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
