@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, ListView, Image }
 import firebase from 'firebase'
 import 'firebase/firestore'
 import Modal from 'react-native-modal'
-import { Card } from 'react-native-elements'
+import { Card, Avatar } from 'react-native-elements'
 import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
 import { ListItem } from 'react-native-elements'
 
@@ -87,7 +87,60 @@ renderRosterList(chatArr) {
                                     />)
 }
 
+renderTeams=()=>{
+  let mlb ={}
+  let nhl ={}
+  let nfl ={}
+  let nba ={}
+  let arr= []
+for (key in this.state.userForModal){
+  mlb.Team = this.state.userForModal.mlbTeamName,
+  mlb.Logo = this.state.userForModal.mlbTeamLogo,
+  nhl.Team = this.state.userForModal.nhlTeamName,
+  nhl.Logo = this.state.userForModal.nhlTeamLogo,
+  nfl.Team = this.state.userForModal.nflTeamName,
+  nfl.Logo = this.state.userForModal.nflTeamLogo,
+  nba.Team = this.state.userForModal.nbaTeamName,
+  nba.Logo = this.state.userForModal.nbaTeamLogo
+}
+if (Object.values(nhl).includes(undefined)){
+  nhl.Team='Pick Your Favorite Hockey Team',
+  nhl.Logo='../../images/logo.png'
+} else{
+  arr.push(nhl)
+}
+if (Object.values(nba).includes(undefined)){
+  nba.Team='Pick Your Favotite Basketball Team',
+  nba.Logo='../../images/logo.png'
+} else {
+  arr.push(nba)
+}
+if (Object.values(nfl).includes(undefined)){
+  nfl.Team='Pick Your Favotite Football Team',
+  nfl.Logo='../../images/logo.png'
+} else {
+  arr.push(nfl)
+}
+if (Object.values(mlb).includes(undefined)){
+  mlb.Team='Pick Your Favotite Baseball Team',
+  mlb.Logo='../../images/logo.png'
+} else{
+  arr.push(mlb)
+}
+return arr.map((info, i)=><View>
+  <ListItem
+    key={i}
+    title={info.Team}
+    leftAvatar ={<Avatar rounded large source={{uri: info.Logo}} height={80} width={80}  aspectRatio={1.5}/>}
+    style={styles.list}
+    containerStyle={{backgroundColor: 'black'}}
+    titleStyle={{ color: 'white', fontWeight: 'bold' }}
+  />
+</View>)
+}
+
   render() {
+    console.log(this.state.userForModal)
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -107,7 +160,7 @@ renderRosterList(chatArr) {
               <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.userForModal.username}</Text>
               <View style={{alignItems: 'center'}}>
               <Image
-                style={{width: 200, height: 200, textAlign: 'center'}}
+                style={{width: 200, height: 140, textAlign: 'center'}}
                 source={{uri: `${this.state.userForModal.picture}`}}
               />
               </View>
@@ -125,7 +178,9 @@ renderRosterList(chatArr) {
                   onPress= {this.closeModal}>
                   <Text style= {styles.modalText }>Close</Text>
                 </Button>
+
                 </View>
+                 {this.renderTeams()}
               </Card>
               </View>
             </Modal>

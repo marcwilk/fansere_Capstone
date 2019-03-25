@@ -9,7 +9,7 @@ export default class Teams extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'M2j6TOA7rKYR1igv6CaVhyGHqcs1',
+      userId: 'WbnNM1HOlxSITQTPnkjY2R7dYOJ3',
       userData: []
     }
   }
@@ -73,12 +73,6 @@ return arr.map((info, i)=><View>
   />
 </View>)
 }
-
-
-
-
-
-
 
 
     render() {
