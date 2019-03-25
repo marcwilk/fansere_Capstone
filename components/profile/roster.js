@@ -147,7 +147,7 @@ return arr.map((info, i)=><View>
           <View style={styles.header}>
             <View style={styles.headerContent}>
                 <Image style={styles.avatar} source={require('../../images/logo.png')}/>
-                <Text style={styles.name}>My Friends</Text>
+                <Text style={styles.name}>My Roster</Text>
             </View>
           </View>
           <View style={styles.body}>

@@ -9,14 +9,13 @@ export default class Teams extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       userData: []
     }
   }
 
 componentDidMount(){
   firebase.firestore().collection('users')
-  .doc(this.state.userId)
+  .doc(this.props.userId)
    .onSnapshot(snapshot=>{
          this.setState({userData: snapshot.data()})
      })
