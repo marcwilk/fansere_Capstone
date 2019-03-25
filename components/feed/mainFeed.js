@@ -11,8 +11,8 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
-      userName:'Sean Tansey',
+      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
+      userName:'Fansere Guy',
       nearbyUsers: [],
       isModalVisible: false,
       modalUser: {},
@@ -36,20 +36,6 @@ export default class Feed extends React.Component {
 
 
   componentDidMount() {
-    firebase.firestore().collection('users')
-      .where('location', '==', 'Denver')
-      .onSnapshot(snapshot => {
-        snapshot.forEach(doc => {
-          let userObj = {
-            userId: doc.id,
-            data: doc.data()
-          }
-          if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
-            this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
-          }
-        }
-        )
-      })
       firebase.firestore().collection('conversations')
         .onSnapshot(snapshot => {
           let newDocs = snapshot.docChanges()
@@ -61,6 +47,20 @@ export default class Feed extends React.Component {
             }
           })
         })
+        firebase.firestore().collection('users')
+          .where('location', '==', 'Denver')
+          .onSnapshot(snapshot => {
+            snapshot.forEach(doc => {
+              let userObj = {
+                userId: doc.id,
+                data: doc.data()
+              }
+              if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
+                this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+              }
+            }
+            )
+          })
   }
 
   removeUserFromState(arr, userId) {
@@ -112,7 +112,7 @@ export default class Feed extends React.Component {
         <View>
           <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
             <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.modalUser.username}</Text>
-            
+
             <Text style={{color: 'white', fontSize: 16}}>
               Tagline: {this.state.modalUser.tagline}
             </Text>

@@ -81,7 +81,6 @@ export default class Maps extends Component<Props> {
         barObj.description = doc.data().description,
         barObj.image = {uri : doc.data().image},
         barObj.website = doc.data().website
-        console.log(barObj)
         this.setState({markers:[...this.state.markers, barObj]})
 
       })
@@ -90,12 +89,12 @@ export default class Maps extends Component<Props> {
 
 
   _onPressButton() {
-    console.log('ZFux')
+
   }
 
 
   render() {
- console.log('markers :', this.state.markers)
+
     const interpolations = this.state.markers.map((marker, index) => {
       const inputRange = [
         (index - 1) * CARD_WIDTH,
