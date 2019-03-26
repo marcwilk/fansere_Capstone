@@ -361,11 +361,11 @@ onPressMlbTeam=(info)=>{
                     <Text style={{ fontSize: 12, color: 'white' }}>Teams</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white' }}>205</Text>
+                    <Text style={{ color: 'white' }}>4</Text>
                     <Text style={{ fontSize: 12, color: 'white' }}>Roster</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white' }}>167</Text>
+                    <Text style={{ color: 'white' }}>2</Text>
                     <Text style={{ fontSize: 12, color: 'white' }}>Users</Text>
                   </View>
                 </View>
@@ -647,6 +647,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     justifyContent: 'center',
     height: 25,
+    width: 50,
     backgroundColor: '#7ed957'
   },
   list: {
