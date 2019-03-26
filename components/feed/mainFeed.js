@@ -12,8 +12,8 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
-      userName:'Sean Tansey',
+      userId: `${this.props.userId}`,
+      userName:'',
       nearbyUsers: [],
       isModalVisible: false,
       modalUser: {},
@@ -32,34 +32,26 @@ export default class Feed extends React.Component {
                result = arr
            }
        }
+       //console.log(result)
        return result
    }
 
 
   componentDidMount() {
-    firebase.firestore().collection('users')
-      .where('location', '==', 'Denver')
-      .onSnapshot(snapshot => {
-        snapshot.forEach(doc => {
-          let userObj = {
-            userId: doc.id,
-            data: doc.data()
-          }
-          if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
-            this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
-          }
-        }
-        )
-      })
       firebase.firestore().collection('conversations')
         .onSnapshot(snapshot => {
           let newDocs = snapshot.docChanges()
+          let conversations = []
           newDocs.forEach(doc => {
             let releventInfo = this.checkForUserId(doc.doc.data().members)
+            //console.log(releventInfo)
             if (releventInfo) {
               let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
-              this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
+              conversations.push(otherUser[0].userId)
+              //this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
             }
+            this.setState({conversations: conversations})
+            //console.log(this.state.conversations)
           })
         })
         firebase.firestore().collection('users')
