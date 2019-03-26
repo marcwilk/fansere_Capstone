@@ -16,7 +16,7 @@ export default class Teams extends React.Component {
 
 componentDidMount(){
   firebase.firestore().collection('users')
-  .doc(this.state.userId)
+  .doc(this.props.userId)
    .onSnapshot(snapshot=>{
          this.setState({userData: snapshot.data()})
      })
@@ -75,12 +75,6 @@ return arr.map((info, i)=><View>
 }
 
 
-
-
-
-
-
-
     render() {
 
     return (
@@ -88,7 +82,7 @@ return arr.map((info, i)=><View>
         <View style={styles.container}>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <Image style={styles.avatar} source={require('../../images/logo.png')}/>
+                <Image style={styles.avatar} source={{uri: `${this.props.picture}`}}/>
                 <Text style={styles.name}>My Teams</Text>
               </View>
             </View>
@@ -107,8 +101,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   header: {
-    backgroundColor: '#545454',
+    backgroundColor: 'black',
     width: '100%',
+    borderColor: 'white',
+    borderWidth: 1
   },
   headerContent: {
     padding: 10,
@@ -119,7 +115,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#7ed957',
     marginBottom: 10
   },
   image: {
@@ -134,7 +130,9 @@ const styles = StyleSheet.create({
   body: {
     width: '100%',
     padding: 30,
-    backgroundColor :'black'
+    backgroundColor :'black',
+    borderColor: 'white',
+    borderWidth: 1
   },
   box: {
     padding:5,

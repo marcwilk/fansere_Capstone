@@ -52,9 +52,10 @@ export default class App extends Component {
       if (user) {
         console.log(user.email)
         console.log(user.uid)
-        this.setState({userEmail: user.email})
         this.setState({userId: user.uid})
-        console.log(this.state.userId)
+        
+
+        this.setState({userEmail: user.email})
 
       } else {
         console.log('no user signed in')
@@ -90,7 +91,7 @@ export default class App extends Component {
     }
     return (
       <View style={styles.container}>
-        {this.state.userEmail ? <TabNavigator /> : <SignUp signIn={this.signIn} signUp={this.signUp} />}
+        {this.state.userEmail ? <TabNavigator screenProps={{userId: this.state.userId}}/> : <SignUp signIn={this.signIn} signUp={this.signUp} />}
       </View>
     );
   }

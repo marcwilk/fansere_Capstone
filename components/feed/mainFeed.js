@@ -32,6 +32,7 @@ export default class Feed extends React.Component {
                result = arr
            }
        }
+       //console.log(result)
        return result
    }
 
@@ -40,17 +41,23 @@ export default class Feed extends React.Component {
       firebase.firestore().collection('conversations')
         .onSnapshot(snapshot => {
           let newDocs = snapshot.docChanges()
+          let conversations = []
           newDocs.forEach(doc => {
             let releventInfo = this.checkForUserId(doc.doc.data().members)
+            //console.log(releventInfo)
             if (releventInfo) {
               let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
-              this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
+              conversations.push(otherUser[0].userId)
+              //this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
             }
+            this.setState({conversations: conversations})
+            //console.log(this.state.conversations)
           })
         })
         firebase.firestore().collection('users')
           .where('location', '==', 'Denver')
-          .onSnapshot(snapshot => {
+          .get()
+          .then(snapshot => {
             snapshot.forEach(doc => {
               let userObj = {
                 userId: doc.id,
@@ -62,6 +69,14 @@ export default class Feed extends React.Component {
             }
             )
           })
+          // make a call to get username
+          firebase.firestore().collection('users')
+            .doc(`${this.state.userId}`)
+            .get()
+            .then(snapshot =>
+              this.setState({userName: snapshot.data().username})
+            )
+
   }
 
   removeUserFromState(arr, userId) {
