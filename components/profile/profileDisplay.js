@@ -14,10 +14,11 @@ export default class Profiledisplay extends React.Component {
     this.state = {
       activeIndex: 0,
       isModalVisable: false,
-      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
+      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
       username: null,
       location: null,
       tagline: null,
+      picture: null,
       NHLTeams: [],
       NFLTeams: [],
       NBATeams: [],
@@ -37,7 +38,7 @@ export default class Profiledisplay extends React.Component {
          .onSnapshot(snapshot => {
            //console.log(snapshot.data())
            let data = snapshot.data()
-           this.setState({location: data.location, tagline: data.tagline, username: data.username})
+           this.setState({location: data.location, tagline: data.tagline, username: data.username, picture: data.picture})
            //console.log(this.state.location)
          })
 
@@ -98,14 +99,19 @@ export default class Profiledisplay extends React.Component {
     this.setState({ tagline: text })
   }
 
-  submitProfile(newUsername, newLocation, newTagline){
+  updatePicture = (text) => {
+    this.setState({ picture: text })
+  }
+
+  submitProfile(newUsername, newLocation, newTagline, newPicture){
     firebase.firestore().collection('users')
       .doc(this.state.userId)
       .set({
         username: newUsername,
         location: newLocation,
-        tagline: newTagline
-      })
+        tagline: newTagline,
+        picture: newPicture
+      }, {merge: true})
   }
 //submits user's nhl team to DB
   submitNhlTeam(userNhlTeamObj){
@@ -166,7 +172,7 @@ export default class Profiledisplay extends React.Component {
   renderSection = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <Teams  />
+        <Teams  userId={this.state.userId}/>
       )
     }
     if (this.state.activeIndex == 1) {
@@ -346,7 +352,7 @@ onPressMlbTeam=(info)=>{
           <View style={{ paddingTop: 10 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                <Image source={require('../../images/logo.png')} style={styles.profileImage} />
+                <Image source={{uri: `${this.state.picture}`}} style={styles.profileImage} />
               </View>
               <View style={{ flex: 3 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-end' }}>
@@ -369,7 +375,7 @@ onPressMlbTeam=(info)=>{
                       <Text style={{ color: 'black' }}>Edit Profile</Text>
                     </Button>
                     <Modal isVisible={this.state.isModalVisible}>
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                       <Card containerStyle={{width: 350, padding: 10, backgroundColor: 'black'}}>
                         <Text style={styles.editProfile}> Edit Profile </Text>
                         <Text style={{color: 'white', fontSize: 16}}>
@@ -408,9 +414,21 @@ onPressMlbTeam=(info)=>{
                           value = {this.state.tagline}
                           onChangeText={this.updateTagline}
                         />
+                        <Text style={{color: 'white', fontSize: 16}}>
+                          Picture (url):
+                        </Text>
+                        <TextInput
+                          underlineColorAndroid = 'transparent'
+                          placeholder = {this.state.picture}
+                          placeholderTextColor = 'white'
+                          autoCapitalize = 'none'
+                          style={styles.textInput}
+                          value = {this.state.picture}
+                          onChangeText={this.updatePicture}
+                        />
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                         <Button light style={styles.button}
-                          onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline) }>
+                          onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline, this.state.picture) }>
                           <Text style = {styles.submitButtonText}>Submit Changes</Text>
                         </Button>
                         <Button danger style={styles.button}
@@ -491,7 +509,7 @@ onPressMlbTeam=(info)=>{
 
 
 
-                    <Button danger style={styles.logout} onPress={() => this.logOut()}>
+                    <Button style={styles.logout} onPress={() => this.logOut()}>
                       <Text style={{ color: 'black' }}>Logout</Text>
                     </Button>
                   </View>
@@ -542,7 +560,7 @@ const styles = StyleSheet.create({
     height: 75,
     borderRadius: 37.5,
     borderWidth: 2,
-    borderColor: '#fff'
+    borderColor: '#7ed957'
   },
   editProfileText: {
     color: 'white',
@@ -597,13 +615,14 @@ const styles = StyleSheet.create({
     height: 30,
     marginRight: 10,
     marginLeft: 5,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#7ed957'
   },
   addTeamsButton: {
-  flex: 2,
-  marginLeft: 5,
-  justifyContent: 'center',
-  height: 30,
+    flex: 2,
+    marginLeft: 5,
+    justifyContent: 'center',
+    height: 30,
   },
   list: {
     borderWidth: .5,
