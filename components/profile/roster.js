@@ -156,7 +156,7 @@ return arr.map((info, i)=><View>
             <View >
             <Modal isVisible={this.state.isModalVisible} style={{paddingRight: 30}}>
             <View>
-              <Card containerStyle={{width: "100%", height: "95%",  backgroundColor: 'black'}}>
+              <Card containerStyle={{width: "100%", height: "85%",  backgroundColor: 'black'}}>
               <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.userForModal.username}</Text>
               <View style={{alignItems: 'center'}}>
               <Image
@@ -170,7 +170,9 @@ return arr.map((info, i)=><View>
               <Text style={{color: 'white', fontSize: 16, padding: 5, fontWeight: 'bold', textAlign: 'center'}}>
                 Location: {this.state.userForModal.location}
               </Text>
+              <ScrollView>
                  {this.renderTeams()}
+                 </ScrollView>
                  <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                  <Button style={{ flex: 3, margin: 10, justifyContent: 'center', height: 30, backgroundColor: '#7ed957' }}
                  onPress= {this.closeModal}>
