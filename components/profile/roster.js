@@ -156,7 +156,7 @@ return arr.map((info, i)=><View>
             <View >
             <Modal isVisible={this.state.isModalVisible} style={{paddingRight: 30}}>
             <View>
-              <Card containerStyle={{width: "100%", height: "85%",  backgroundColor: 'black'}}>
+              <Card containerStyle={{width: "100%", height: "95%",  backgroundColor: 'black'}}>
               <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.userForModal.username}</Text>
               <View style={{alignItems: 'center'}}>
               <Image
