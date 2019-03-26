@@ -16,7 +16,7 @@
 
 ### Installation
 
-Step One: Clone this repo to your local machine  
+Step One: clone this repo to your local machine  
 Step Two: npm install  
 Step Three: cd into ios, pod repo update, pod install  
 Step Four: npm start OR react-native start  
