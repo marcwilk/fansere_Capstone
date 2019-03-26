@@ -445,8 +445,8 @@ onPressMlbTeam=(info)=>{
 
 
                     <Modal isVisible={this.state.isSportsModalVisible} style={{paddingRight: 30}}>
-                      <Card containerStyle={{width: "100%", height: "70%",  backgroundColor: 'black'}}>
-                        <View >
+                      <Card containerStyle={{width: "100%", height: "50%",  backgroundColor: 'black'}}>
+                        <View>
                           <ListItem leftAvatar={{source:require('../../images/nhl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NHL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNhlListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/nfl.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'NFL '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressNflListItem()} isVisible={this.state.isSportsModalVisible}/>
                           <ListItem leftAvatar={{source:require('../../images/mlb.gif')}} style={styles.list} containerStyle={{backgroundColor: 'black'}}  chevron chevronColor="black" title={'MLB '} titleStyle={{ color: 'white', fontWeight: 'bold' }} onPress={e => this.onPressMlbListItem()} isVisible={this.state.isSportsModalVisible}/>
@@ -460,20 +460,20 @@ onPressMlbTeam=(info)=>{
                         </Card>
 
                         <Modal isVisible={this.state.isNflModalVisible} style={{paddingRight: 30}}>
-                          <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                          <Button style={styles.addTeamsButton}  onPress={this.onPressNflListItem} >
-                            <Text>Close</Text>
+                          <Card containerStyle={{width: "100%", height: "60%", paddingBottom: 25, backgroundColor: 'black'}}>
+                          <Button style={styles.closeTeamsButton}  onPress={this.onPressNflListItem} >
+                            <Text style={{color: 'black'}}>Close</Text>
                           </Button>
-                          <ScrollView>
+                          <ScrollView style={{paddingBottom: 20}}>
                              {this.renderNflTeams()}
                           </ScrollView>
                         </Card>
                       </Modal>
 
                       <Modal isVisible={this.state.isNhlModalVisible} style={{paddingRight: 30}}>
-                        <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                        <Button style={styles.addTeamsButton}  onPress={this.onPressNhlListItem} >
-                          <Text>Close</Text>
+                        <Card containerStyle={{width: "100%", height: "60%", paddingBottom: 25, backgroundColor: 'black'}}>
+                        <Button style={styles.closeTeamsButton}  onPress={this.onPressNhlListItem} >
+                          <Text style={{color: 'black'}}>Close</Text>
                           </Button>
                           <ScrollView>
                             {this.renderNhlTeams()}
@@ -482,9 +482,9 @@ onPressMlbTeam=(info)=>{
                     </Modal>
 
                     <Modal isVisible={this.state.isMlbModalVisible} style={{paddingRight: 30}}>
-                      <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                      <Button style={styles.addTeamsButton}  onPress={this.onPressMlbListItem} >
-                        <Text>Close</Text>
+                      <Card containerStyle={{width: "100%", height: "60%", paddingBottom: 25, backgroundColor: 'black'}}>
+                      <Button style={styles.closeTeamsButton}  onPress={this.onPressMlbListItem} >
+                        <Text style={{color: 'black'}}>Close</Text>
                         </Button>
                         <ScrollView>
                             {this.renderMlbTeams()}
@@ -494,9 +494,9 @@ onPressMlbTeam=(info)=>{
                   </Modal>
 
                   <Modal isVisible={this.state.isNbaModalVisible} style={{paddingRight: 30}}>
-                    <Card containerStyle={{width: "100%", height: "60%",  backgroundColor: 'black'}}>
-                    <Button style={styles.addTeamsButton}  onPress={this.onPressNbaListItem} >
-                      <Text>Close</Text>
+                    <Card containerStyle={{width: "100%", height: "60%", paddingBottom: 25, backgroundColor: 'black'}}>
+                    <Button style={styles.closeTeamsButton}  onPress={this.onPressNbaListItem} >
+                      <Text style={{color: 'black'}}>Close</Text>
                       </Button>
                       <ScrollView>
                           {this.renderNbaTeams()}
@@ -632,13 +632,21 @@ const styles = StyleSheet.create({
     flex: 2,
     marginLeft: 5,
     justifyContent: 'center',
-    height: 30
+    height: 30,
+    color: 'black'
   },
   addTeamsButton: {
     flex: 2,
     marginLeft: 5,
     justifyContent: 'center',
     height: 30,
+    backgroundColor: '#7ed957',
+    color: 'black'
+  },
+  closeTeamsButton: {
+    marginLeft: 5,
+    justifyContent: 'center',
+    height: 25,
     backgroundColor: '#7ed957'
   },
   list: {
