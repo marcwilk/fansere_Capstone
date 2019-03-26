@@ -66,7 +66,7 @@ ReactNative, JavaScript, Node, NPM, Android Studio, Xcode, HTML, CSS, ReactNativ
 
 <a href="https://facebook.github.io/react-native/"><img src="images/react-original.svg" target="_blank" title="React" alt="React" width="15%"></a>
 <a href="https://www.javascript.com/"><img src="images/javascript-original.svg" target="_blank" title="JS" alt="JS" width="15%"></a>
-<a href="https://www.firebase.com/"><img src="images/firebase.png" target="_blank" title="Firebase" alt="Firebase" width="15%" height="15%"></a>
+<a href="https://www.firebase.com/"><img src="images/firebase.png" target="_blank" title="Firebase" alt="Firebase" width="15%" height="10%"></a>
 <a href="https://nodejs.org/en/"><img src="images/nodejs-original.svg" target="_blank" title="Node" alt="Node" width="15%"></a>
 <a href="https://npmjs.com"><img src="images/npm-original-wordmark.svg" target="_blank" title="NPM" alt="NPM" width="15%"></a>
 <a href="https://www.android.com/"><img src="images/android-original.svg" target="_blank" title="Android" alt="Android" width="15%"></a>
