@@ -178,7 +178,6 @@ return arr.map((info, i)=><View>
                  onPress= {this.closeModal}>
                  <Text style= {styles.modalText }>Close</Text>
                  </Button>
-
                  </View>
               </Card>
               </View>
