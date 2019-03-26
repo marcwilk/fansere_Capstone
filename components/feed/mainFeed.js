@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text, TextInput, ScrollView, Image} from 'react-native'
+import { View, StyleSheet, Text, TextInput} from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
-import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
+import { Container, Content, Icon, Left, Body, Right, Button, Image } from 'native-base'
 import OtherUsers from './otherUsers'
 import Modal from 'react-native-modal'
 import { Header, Card } from 'react-native-elements'
@@ -11,12 +11,11 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'SEYs1nENkxZSuKqwbJLJ9E0zfGs2',
-      userName:'Owen Thompson',
+      userId: 'soalBDZkkoMBzJAd5EdQsE5x8113',
+      userName:'Sean Tansey',
       nearbyUsers: [],
       isModalVisible: false,
       modalUser: {},
-      userForModal:{},
       conversations: []
     }
     this.modalUser = this.modalUser.bind(this)
@@ -32,51 +31,36 @@ export default class Feed extends React.Component {
                result = arr
            }
        }
-       //console.log(result)
        return result
    }
 
 
   componentDidMount() {
+    firebase.firestore().collection('users')
+      .where('location', '==', 'Denver')
+      .onSnapshot(snapshot => {
+        snapshot.forEach(doc => {
+          let userObj = {
+            userId: doc.id,
+            data: doc.data()
+          }
+          if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
+            this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
+          }
+        }
+        )
+      })
       firebase.firestore().collection('conversations')
         .onSnapshot(snapshot => {
           let newDocs = snapshot.docChanges()
-          let conversations = []
           newDocs.forEach(doc => {
             let releventInfo = this.checkForUserId(doc.doc.data().members)
-            //console.log(releventInfo)
             if (releventInfo) {
               let otherUser = doc.doc.data().members.filter(conv => conv.userId !== this.state.userId)
-              conversations.push(otherUser[0].userId)
-              //this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
+              this.setState({conversations: [...this.state.conversations, otherUser[0].userId]})
             }
-            this.setState({conversations: conversations})
-            //console.log(this.state.conversations)
           })
         })
-        firebase.firestore().collection('users')
-          .where('location', '==', 'Denver')
-          .get()
-          .then(snapshot => {
-            snapshot.forEach(doc => {
-              let userObj = {
-                userId: doc.id,
-                data: doc.data()
-              }
-              if (!this.state.conversations.includes(doc.id) && doc.id !== this.state.userId) {
-                this.setState({nearbyUsers: [...this.state.nearbyUsers, userObj]})
-              }
-            }
-            )
-          })
-          // make a call to get username
-          firebase.firestore().collection('users')
-            .doc(`${this.state.userId}`)
-            .get()
-            .then(snapshot =>
-              this.setState({userName: snapshot.data().username})
-            )
-
   }
 
   removeUserFromState(arr, userId) {
@@ -116,8 +100,6 @@ export default class Feed extends React.Component {
   }
 
   render() {
-
-    console.log(this.state.modalUser)
     return (
       <View>
       <Header
@@ -130,12 +112,6 @@ export default class Feed extends React.Component {
         <View>
           <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
             <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.modalUser.username}</Text>
-            <View style={{alignItems: 'center'}}>
-            <Image
-              style={{width: 200, height: 200, textAlign: 'center'}}
-              source={{uri: `${this.state.modalUser.picture}`}}
-            />
-            </View>
 
             <Text style={{color: 'white', fontSize: 16}}>
               Tagline: {this.state.modalUser.tagline}
