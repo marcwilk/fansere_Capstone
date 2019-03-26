@@ -18,8 +18,9 @@
 
 Step One: Clone this repo to your local machine  
 Step Two: npm install  
-Step Three: npm start OR react-native start  
-Step Four: react-native run-android OR react-native run-ios  
+Step Three: cd into ios, pod repo update, pod install  
+Step Four: npm start OR react-native start  
+Step Five: react-native run-android OR react-native run-ios  
 
 ### About
 
