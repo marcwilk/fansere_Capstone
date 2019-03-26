@@ -100,8 +100,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   header: {
-    backgroundColor: '#545454',
+    backgroundColor: 'black',
     width: '100%',
+    borderColor: 'white',
+    borderWidth: 1
   },
   headerContent: {
     padding: 10,
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: '#7ed957',
     marginBottom: 10
   },
   image: {
@@ -127,7 +129,9 @@ const styles = StyleSheet.create({
   body: {
     width: '100%',
     padding: 30,
-    backgroundColor :'black'
+    backgroundColor :'black',
+    borderColor: 'white',
+    borderWidth: 1
   },
   box: {
     padding:5,
