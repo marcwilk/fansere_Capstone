@@ -24,8 +24,6 @@ export default class App extends Component {
       userId: null,
       isLoading: true
     }
-    //this.authCheck = this.authCheck.bind(this)
-    //this.toggleLogin = this.toggleLogin.bind(this)
     this.signIn = this.signIn.bind(this)
   }
 
@@ -50,11 +48,13 @@ export default class App extends Component {
   authListener() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.email)
-        console.log(user.uid)
+        //console.log(user.email)
+        //console.log(user.uid)
         this.setState({userId: user.uid})
         this.setState({userEmail: user.email})
+
       } else {
+        //this.createUserInDb()
         console.log('no user signed in')
         this.setState({userEmail: null})
       }
@@ -73,14 +73,21 @@ export default class App extends Component {
   }
 
   signUp(email, password) {
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage)
-      // ...
-    })
-  }
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        //creates a new user in actual db
+        firebase.firestore().collection('users').doc(user.user.uid).set({
+          location: ''
+        })
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        // ...
+      })
+    }
 
   render() {
     if(this.state.isLoading){
