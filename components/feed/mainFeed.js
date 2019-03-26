@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text, TextInput} from 'react-native'
+import { View, StyleSheet, Text, TextInput, ScrollView, Image} from 'react-native'
 import firebase from 'firebase'
 import 'firebase/firestore'
-import { Container, Content, Icon, Left, Body, Right, Button, Image } from 'native-base'
+import { Container, Content, Icon, Left, Body, Right, Button } from 'native-base'
 import OtherUsers from './otherUsers'
 import Modal from 'react-native-modal'
 import { Header, Card } from 'react-native-elements'
@@ -11,11 +11,12 @@ export default class Feed extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: 'ldPba8sgFXeM2q3SF2u6CupAy7v2',
-      userName:'Fansere Guy',
+      userId: 'SEYs1nENkxZSuKqwbJLJ9E0zfGs2',
+      userName:'Owen Thompson',
       nearbyUsers: [],
       isModalVisible: false,
       modalUser: {},
+      userForModal:{},
       conversations: []
     }
     this.modalUser = this.modalUser.bind(this)
@@ -100,6 +101,8 @@ export default class Feed extends React.Component {
   }
 
   render() {
+
+    console.log(this.state.modalUser)
     return (
       <View>
       <Header
@@ -112,6 +115,12 @@ export default class Feed extends React.Component {
         <View>
           <Card containerStyle={{width: "100%", height: "90%",  backgroundColor: 'black'}}>
             <Text style={{color: 'white', fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>{this.state.modalUser.username}</Text>
+            <View style={{alignItems: 'center'}}>
+            <Image
+              style={{width: 200, height: 200, textAlign: 'center'}}
+              source={{uri: `${this.state.modalUser.picture}`}}
+            />
+            </View>
 
             <Text style={{color: 'white', fontSize: 16}}>
               Tagline: {this.state.modalUser.tagline}
