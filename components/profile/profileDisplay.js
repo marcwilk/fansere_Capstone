@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, ScrollView, TextInput, Image, Alert } from 'react-native'
-import { Button } from 'native-base'
+import { Container, Content, Picker, Form, Button } from 'native-base'
 import { Header, Card, ListItem, Avatar } from 'react-native-elements'
 import Modal from 'react-native-modal'
 import Teams from './teams'
@@ -16,7 +16,7 @@ export default class Profiledisplay extends React.Component {
       isModalVisable: false,
       userId: `${this.props.userId}`,
       username: null,
-      location: null,
+      location: "New York",
       tagline: null,
       picture: null,
       NHLTeams: [],
@@ -90,10 +90,16 @@ export default class Profiledisplay extends React.Component {
   updateUsername = (text) => {
     this.setState({ username: text} )
   }
+//change user location
+  onValueChange(value: string) {
+   this.setState({
+     location: value
+   });
+ }
 
-  updateLocation = (text) => {
-    this.setState({ location: text })
-  }
+  //updateLocation = (text) => {
+  //  this.setState({ location: text })
+  //}
 
   updateTagline = (text) => {
     this.setState({ tagline: text })
@@ -344,6 +350,8 @@ onPressMlbTeam=(info)=>{
       </View>)
   }
 
+
+
   render() {
 
     return (
@@ -361,11 +369,11 @@ onPressMlbTeam=(info)=>{
                     <Text style={{ fontSize: 12, color: 'white' }}>Teams</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white' }}>4</Text>
+                    <Text style={{ color: 'white' }}>2</Text>
                     <Text style={{ fontSize: 12, color: 'white' }}>Roster</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: 'white' }}>2</Text>
+                    <Text style={{ color: 'white' }}>5</Text>
                     <Text style={{ fontSize: 12, color: 'white' }}>Users</Text>
                   </View>
                 </View>
@@ -390,18 +398,7 @@ onPressMlbTeam=(info)=>{
                           value = {this.state.username}
                           onChangeText={this.updateUsername}
                         />
-                        <Text style={{color: 'white', fontSize: 16}}>
-                          Location:
-                        </Text>
-                        <TextInput
-                          underlineColorAndroid = 'transparent'
-                          placeholder = {this.state.location}
-                          placeholderTextColor = 'white'
-                          autoCapitalize = 'none'
-                          style={styles.textInput}
-                          value = {this.state.location}
-                          onChangeText={this.updateLocation}
-                        />
+
                         <Text style={{color: 'white', fontSize: 16}}>
                           Tagline:
                         </Text>
@@ -426,6 +423,25 @@ onPressMlbTeam=(info)=>{
                           value = {this.state.picture}
                           onChangeText={this.updatePicture}
                         />
+                        <Text style={{color: 'white', fontSize: 16}}>
+                          Location:
+                        </Text>
+                          <View style={{paddingLeft: 10, paddingTop: 10}}>
+                            <Picker
+                              mode="dropdown"
+                              style={{ width: 310, height: 35, borderColor: 'white', borderWidth: 1, color: 'black', fontSize: 12, backgroundColor: '#7ed957' }}
+                              selectedValue={this.state.location}
+                              onValueChange={this.onValueChange.bind(this)}
+                            >
+                              <Picker.Item label="Denver" value="Denver" />
+                              <Picker.Item label="New York" value="New York" />
+                              <Picker.Item label="Atlanta" value="Atlanta" />
+                              <Picker.Item label="Miami" value="Miami" />
+                              <Picker.Item label="Los Angeles" value="Los Angeles" />
+                            </Picker>
+                            </View>
+
+
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                         <Button light style={styles.submitButton}
                           onPress= { () => this.submitProfile(this.state.username, this.state.location, this.state.tagline, this.state.picture) }>
@@ -496,7 +512,7 @@ onPressMlbTeam=(info)=>{
                   <Modal isVisible={this.state.isNbaModalVisible} style={{paddingRight: 30}}>
                     <Card containerStyle={{width: "100%", height: "60%", paddingBottom: 25, backgroundColor: 'black'}}>
                     <Button style={styles.closeTeamsButton}  onPress={this.onPressNbaListItem} >
-                      <Text style={{color: 'black'}}>Close</Text>
+                      <Text style={{color: 'black'}}>X</Text>
                       </Button>
                       <ScrollView>
                           {this.renderNbaTeams()}
@@ -608,7 +624,8 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     color: 'black',
-    backgroundColor: '#7ed957'
+    backgroundColor: '#7ed957',
+    borderRadius: 5
   },
   submitButtonText: {
     color: 'black'
@@ -644,10 +661,10 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   closeTeamsButton: {
-    marginLeft: 0,
+    marginLeft: 5,
     justifyContent: 'center',
     height: 25,
-    width: 25,
+    width: 30,
     backgroundColor: '#7ed957'
   },
   list: {

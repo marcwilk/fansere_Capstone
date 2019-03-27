@@ -4,7 +4,7 @@
 
 # Fansere - Sports Meetup App
 
-(https://www.youtube.com/watch?v=LgvtEnydU1A&feature=youtu.be)
+(https://www.youtube.com/watch?v=d7_7NS9uJ4k)
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@
 
 ### Installation
 
-Step One: clone this repo to your local machine  
+Step One: c lone this repo to your local machine  
 Step Two: npm install  
 Step Three: cd into ios, pod repo update, pod install  
 Step Four: npm start OR react-native start  
